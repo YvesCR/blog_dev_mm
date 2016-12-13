@@ -1,0 +1,16 @@
+{
+    "contents" : "---\nlayout: default\n---\n\n<div class=\"home\">\n\n  <h1 class=\"page-heading\">Posts</h1>\n\n    {% for post in site.posts %}\n\t<div class=\"brick freeze_white freeze_normal  big\" style=\"width:100%; max-width:100%;  {% if post.photo_url %} height:300px;{% endif %} margin:0px;top:30px;\">\n\t\t<a class=\"post-link\" href=\"{{ site.baseurl }}{{ post.url }}\"> \n\t\t {% if post.photo_url %} \n\t\t \t\t<div class=\"img\" >\n\t\t<img src=\"{{  site.baseurl  }}/image/{{ post.photo_url }}\" alt=\"{{post.description}}\" \n\t\tstyle=\"float:left;max-width: 48%;max-height:300px;margin:0px;margin-right:2%;text-align: center;vertical-align: middle;\">\n\t\t</div>\n\t\t{% endif %} \n\t\t<div class=\"freeze_titres\" style=\"{% if post.photo_url %}float:right;max-width:48%;{% endif %} height:auto;margin:0px;\">\n\t\t<span class=\"post-meta\">{{ post.date | date: \"%b %-d, %Y\" }}</span>\n\t\t<h2>{{ post.title }}</h2>  \n\t\t</div>\n\t\t</a>\n \t</div>\n    {% endfor %}\n\n  <!-- <p class=\"rss-subscribe\">subscribe <a href=\"{{ \"/feed.xml\" | prepend: site.baseurl }}\">via RSS</a></p> -->\n\n</div>\n",
+    "created" : 1481586229631.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "865947266",
+    "id" : "C04AA14D",
+    "lastKnownWriteTime" : 1450625244,
+    "path" : "C:/blog/gen/index.html",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "html"
+}
