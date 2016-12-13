@@ -19,7 +19,7 @@ baseurl                  : "/blog_dev_mm"
 repository               : "YvesCR/blog_dev_mm"
 teaser                   : "/assets/images/Hausdülmen_--_2009_--_0706.jpg"
 # breadcrumbs            : false # true, false (default)
-words_per_minute         : 200
+words_per_minute         : 100
 comments:
   provider               : "disqus"
   disqus:
