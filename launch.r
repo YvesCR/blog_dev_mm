@@ -8,6 +8,6 @@ getwd()
 options("base64_images")
 
 
-# serve the blog subfolder: basically, the dev version
+# serve the blog subfolder:
 servr::jekyll(input = "_source", output = "_posts")
 
