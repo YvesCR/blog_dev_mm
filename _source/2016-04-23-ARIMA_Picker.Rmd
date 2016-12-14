@@ -5,7 +5,8 @@ categories: [Statistic]
 tags: [R, Data visualisation, Statistic, ARIMA, shiny]
 date: 2016-04-23
 excerpt: Presentation of a shiny gadget allowing to pick arima parameters.
-teaser: /assets/images/1998_orange_bleue_Scud.jpg
+url: /assets/images/1998_orange_bleue_Scud.jpg
+image_path: /assets/images/1998_orange_bleue_Scud.jpg
 ---
 
 <img src="https://yvescr.github.io/image/arimaUI_Picker.gif" alt="Presentation of a shiny gadget allowing to pick arima parameters" 
