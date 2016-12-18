@@ -1,22 +1,22 @@
 ---
 layout: single
-title: "Send an email to all your representatives. With R."
+title: "Send an Email to all your Representatives. With R."
 categories: [hack]
 tags: [R, XML]
 date: 2015-07-15
-description: Script to scramble the website of the french senat and send 300 emails. 
-photo_url: senat.jpg
+excerpt: Script to scrape the website of the french senat and send 300 emails
+teaser: assets/images/senat.jpg
 ---
 
 I disagreed with the recent law the French government pass.
 
 I wanted to explain my point of view to the French senators and did it manually at first. After sending two mails, it hits me that it is possible to do a script to automate it and even a R script.
 
-The two main packages used are `XML` and `mailR`, respectively to do the HTML scrambling and automatically sent mails.
+The two main packages used are `XML` and `mailR`, respectively to do the HTML scraping and automatically sent mails.
 
 The XML package is really simple to handle for this task and have the `getHTMLLinks()` function which extract all the link from a webpage.
 
-<h1> Scrambling the senate website </h1>
+<h1> Scrape the senate website </h1>
 
 In the French senate website, we could find a personal page for each senator and a few information on our representatives, including the group, the mail provided by the senate and sometime personals mails.
 
@@ -65,10 +65,10 @@ senateur.infos.primaire$full.name.surname[i] <- substr(mails[substr(mails, 1, 20
 
 print(ptm0 <- ptm - proc.time())
 
-## convert to correct encodin to deal with the special characters
+## convert to correct encoding to deal with the special characters
 senateur.infos.primaire$full.name.surname <- iconv(senateur.infos.primaire$full.name.surname, from = "UTF-8", to = "LATIN2")
 
-# sexe definition:
+# sex definition:
 senateur.infos.primaire$sexe <- ifelse(substr(senateur.infos.primaire$full.name.surname, 1, 5) == "de la", "F", " ")
 senateur.infos.primaire$sexe <- ifelse(substr(senateur.infos.primaire$full.name.surname, 1, 4) == "du S", "M", senateur.infos.primaire$sexe)
 {% endhighlight %}
@@ -78,11 +78,11 @@ senateur.infos.primaire$sexe <- ifelse(substr(senateur.infos.primaire$full.name.
 
 In the end, we get a file with all the emails of the French senators and the associated details.
 
-<h1> Sending the mails </h1>
+<h1> Sending the emails </h1>
 
-The package mailR allow to send email within R. It is very useful when you have really long process and you want to be averted when the process is finished.
+The package `mailR` allows to send email within R. It is very useful when you have really long process and you want to be averted when the process is finished.
 
-The function send.mail is very practical, as it allows to send HTML formatted emails, which allow a great deal of customization.
+In addition, the function `send.mail` send HTML formatted emails, which allows a great deal of customization.
 
 To facilitate the debugging, the mail is written in HTML then the `brew` package is used to replace the names, and personalize the message looking at the group. It allows as well to keep the log of the mail.
 
@@ -115,11 +115,11 @@ tt <- send.mail(from = from, to = to
 }
 {% endhighlight %}
 
-The loop for sending the mail could take a few minutes.
+The loop for sending the email could take a few minutes.
 
 <h1> Parity Analysis </h1>
 
-The file allow an analysis of the parity. 
+The file allows an analysis of the parity. 
 
 
 
@@ -143,7 +143,6 @@ ggplot(senateur.infos, aes(x = group, fill= sexe)) + geom_bar() +
         , axis.title = element_text(size = 15, colour = "darkcyan", face = "bold"))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](/blog/figure/source/2015-07-15-Mail_to_senateur/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-07-15-Mail_to_senateur/unnamed-chunk-5-1.png)
 
 Only the CRC (communists) and the ecologists have a strict parity.
-

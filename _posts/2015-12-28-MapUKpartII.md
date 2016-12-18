@@ -1,12 +1,12 @@
 ---
 layout: single
-title: "Choropleth map of the UK with R - Part II:\n
-Is central London a ghost town?"
-categories: [ Data visualisation, Statistic]
+title: "Choropleth Map of the UK with R - Part II:\n
+Is Central London a Ghost Town?"
+categories: [Data visualisation]
 tags: [ggmap, R, London]
 date: 2015-12-28
-description: Create new UK regions based on density.
-photo_url: london_ghost.jpg
+excerpt: Create new UK regions based on density.
+teaser: assets/images/london_ghost.jpg
 ---
 
 In the first part, we get a nice tool of visualisation of the district postcode area, a chloropeth Map.
@@ -42,7 +42,7 @@ ggmap(map)  +
   theme_map_uk
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-2](/blog/figure/source/2015-12-28-MapUKpartII/unnamed-chunk-2-1.png) 
+![plot of chunk unnamed-chunk-2](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-12-28-MapUKpartII/unnamed-chunk-2-1.png)
 
 A bigger one (45 Mb) could be found with the code to produce it in my github account, [here](https://github.com/YvesCR/blog/blob/gh-pages/image/Big_UK_Density_cluster_Plot.png).
 
@@ -93,7 +93,7 @@ ggmap(map) +
       , panel.margin = unit(c(0, 0, 0, 0), "mm"))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](/blog/figure/source/2015-12-28-MapUKpartII/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-12-28-MapUKpartII/unnamed-chunk-5-1.png)
 
 With a zoom on Greater London:
 
@@ -107,7 +107,7 @@ ggmap(map2)  +
   theme_map_uk
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-6](/blog/figure/source/2015-12-28-MapUKpartII/unnamed-chunk-6-1.png) 
+![plot of chunk unnamed-chunk-6](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-12-28-MapUKpartII/unnamed-chunk-6-1.png)
 
 We could clearly sees that in central London, the numbers are oddly low, then suddenly very high when we go further and it decrease with the distance.
 

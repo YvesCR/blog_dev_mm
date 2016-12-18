@@ -1,10 +1,10 @@
 # main links
 main:
   - title: "About"
-    url: https://data-laborer.eu/blog_dev_mm/about/index.html
+    url: /about/index.html
+  - title: "Grid View"
+    url: /portfolio/
   # - title: "Sample Posts"
     # url: /year-archive/
   # - title: "Sample Collections"
     # url: /collection-archive/
-  # - title: "Sitemap"
-    # url: /sitemap/

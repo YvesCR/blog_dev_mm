@@ -1,11 +1,11 @@
 ---
 layout: single
-title: "Why I moved to a jekyll blog"
-categories: []
+title: "Why I Moved to a Jekyll Blog"
+categories: [jekyll]
 tags: [R, leaflet, jekyll]
 date: 2015-12-21
-description: Blogging with jekyll and avoiding mister Hyde.
-photo_url: logo-jekyll.png
+excerpt: Blogging with Jekyll and avoiding mister Hyde.
+teaser: assets/images/logo-jekyll.png
 ---
 
 Last year, I began this blog using wordpress and ended not really satisfied. Mainly for two reason:
@@ -51,7 +51,6 @@ With jekyll and R markdown, the update process is different:
 
 The result could be seen in the web browser automatically refreshed, which make the writing process really easy.
 
-
 ## Github
 
 One great thing with jekyll is that it is possible to host your web site on github.
@@ -61,6 +60,15 @@ How Github cooperate with R markdown and Jekyll?
 Simply coordinate the static website folder with a github repositery. Then parametise this repositery to be  on a gh-pages branch, et voila!, you could see your website.
 
 In the end, updating the blog is as easy as write a .rmd file and coordinate the generated result to github.
+
+Edit: For even more ease, you could use git to link your project with your repository from within Rstudio.
+For a good tutorial, see [that page](http://www.datasurg.net/2015/07/13/rstudio-and-github/).
+
+## Edit: Minimal mistakes
+
+Since January 2017, I have moved to the [Minimal Mistakes](https://mademistakes.com/work/minimal-mistakes-jekyll-theme/) theme.
+
+Now, with my blog as a template, anybody can use that theme within Rstudio.
 
 ## Issues
 

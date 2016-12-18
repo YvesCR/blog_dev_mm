@@ -15,9 +15,9 @@ title_separator          : "-"
 name                     : "Yves Crutain"
 description              : "Personnal blog of a data scientist"
 url                      : "https://data-laborer.eu"
-baseurl                  : "/blog_dev_mm"
+baseurl                  : "/blog_dev_mm/"
 repository               : "YvesCR/blog_dev_mm"
-teaser                   : "/assets/images/Hausdülmen_--_2009_--_0706.jpg"
+teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 100
 comments:
@@ -53,7 +53,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "YvesCr"
+  name             : "Yves Crutain"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : 
   location         : "London"

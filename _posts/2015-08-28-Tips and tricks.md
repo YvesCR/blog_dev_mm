@@ -1,37 +1,41 @@
 ---
 layout: single
-title: "Tips and tricks to know in R"
+title: "Tips and Tricks to Know in R"
 categories: [R]
 tags: [R]
 date: 2015-08-28
-description: Set of tips and tricks to know when coding in R.
-photo_url: toollbox.jpg
+excerpt: Set of tips and tricks I found usefull in my R journey
+teaser: assets/images/toollbox.jpg
 ---
 
+This is a set of tips and tricks to know when coding in R which aren't for beginners but not as advanced as Hadley Wickham [advance-R](http://adv-r.had.co.nz/).  
 
-This is a set of tips and tricks to know when coding in R which aren't for beginners but not as advanced as Hadley Wickham [advance-R](http://adv-r.had.co.nz/).
-
-The idea is to compile the best practice in R which increased my productivity in the last years and share them.
+The idea is to compile the best practice in R which had increased my productivity in the last years and share them.
 
 <h3> When working with Rstudio, one project = one folder </h3>
 
 Project could be found in file -> New Project...
 
-This is especially a good advice if you work on different projects or are used to have multiple session of R open at the same time.
+This is especially a good advice if you work on different projects or are used to have multiple sessions of R open at the same time.
 
 It allows to fastly close and open a project, as the session is saved, including the tab of your session and the data in your memory.
-The only thing to take care is to have a light amount of data in memory. Otherwise, the project could take a while to close. If it becomes problematic, there is an option in Tools>global options>untick "always save history"
 
-Personally, I like organise my project in the following directory structure:
+The only thing to take care is to have a light amount of data in memory. Otherwise, the project could take a while to close. If it becomes problematic, there is an option in Tools>global options>untick "always save history" to change that.
+
+Personally, I like to organise my project in the following directory structure:
 Project
 
- -- -- PGM
+ -- -- R
 
- -- -- DOC
+ -- -- doc
 
- -- -- DATA
+ -- -- data
+ 
+ -- -- plot
 
- -- -- OUTPUT
+ -- -- output
+ 
+ It is similar to the folder structure used when creating a package, with doc and output in addition.
 
 <h3> Style your code </h3>
 
@@ -52,7 +56,7 @@ The most important rules:
 
 <h3> Use data.table </h3>
 
-The data.table is The package which allow me to consider R as a software which could be used as equal to SAS (at least in marketing studies).
+The data.table is the package which make me consider R as a software which could be used as equal to SAS (at least in marketing studies).
 
 The concepts could be tough at the beginning, but after a few time of practice, your productivity is multiplied. 
 
@@ -106,7 +110,7 @@ diamonds.dt[, c(lapply(.SD, median.unique), count = .N), by = cut, .SD = var.of.
 
 
 {% highlight text %}
-##          cut carat depth  price     x    y    z count
+##          cut carat depth  price     x    y    z     N
 ## 1:     Ideal  0.54  61.8 1810.0 5.250 5.26 3.23 21551
 ## 2:   Premium  0.86  61.4 3185.0 6.110 6.06 3.72 13791
 ## 3:      Good  0.82  63.4 3050.5 5.980 5.99 3.70  4906
@@ -117,8 +121,8 @@ diamonds.dt[, c(lapply(.SD, median.unique), count = .N), by = cut, .SD = var.of.
 
 
 {% highlight r %}
-# count of all the diamonds away from the mean of more than to
-# sd:(number of potential outliers).
+# count of all the diamonds away from the mean of more than to sd:(number of
+# potential outliers).
 away.sd <- function(x) sum(abs(x - mean(x)) > 2 * sd(x))
 diamonds.dt[, c(lapply(.SD, away.sd), count = .N), by = cut, .SD = var.of.interest]
 {% endhighlight %}
@@ -126,7 +130,7 @@ diamonds.dt[, c(lapply(.SD, away.sd), count = .N), by = cut, .SD = var.of.intere
 
 
 {% highlight text %}
-##          cut carat depth price   x   y   z count
+##          cut carat depth price   x   y   z     N
 ## 1:     Ideal  1020   855  1390 711 656 717 21551
 ## 2:   Premium   831   564   942 253 123 240 13791
 ## 3:      Good   226   402   305 159 168 164  4906
@@ -146,7 +150,7 @@ diamonds.dt[, c(lapply(.SD, away.sd2), count = .N), by = cut, .SD = var.of.inter
 
 
 {% highlight text %}
-##          cut  carat  depth  price      x      y      z count
+##          cut  carat  depth  price      x      y      z     N
 ## 1:     Ideal 0.047% 0.040% 0.064% 0.033% 0.030% 0.033% 21551
 ## 2:   Premium 0.060% 0.041% 0.068% 0.018% 0.009% 0.017% 13791
 ## 3:      Good 0.046% 0.082% 0.062% 0.032% 0.034% 0.033%  4906
@@ -154,12 +158,12 @@ diamonds.dt[, c(lapply(.SD, away.sd2), count = .N), by = cut, .SD = var.of.inter
 ## 5:      Fair 0.038% 0.071% 0.066% 0.048% 0.047% 0.047%  1610
 {% endhighlight %}
 
-This is only a glipse of what could be done with the data.table packages. Basically, all I used to do in SQL before, I now do it with data.table.
+This is only a glipse of what could be done with the data.table packages. All I used to do in SQL before, I now do it with data.table.
 
 <h3> Mastering ggplot2 </h3>
 
 A good way to aprehend a set of data is to use data visualisation.
-The ggplot2 package allow, when mastered, to do highly customised graph. Even [XKCD-like](https://xkcd.com/519/) ones (In this case, replace perl by ggplot2).
+The ggplot2 package allows, when mastered, to do highly customised graph. Even [XKCD-like](https://xkcd.com/519/) ones (In this case, replace perl by ggplot2).
 
 The [official documentation](http://docs.ggplot2.org/current/) is well made, but for beginners, [this excellent blog](http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/) is more appropriate. 
 
@@ -175,7 +179,7 @@ p2 <- ggplot(aes(x = carat, y = price, colour = clarity), data = diamonds.dt) +
 grid.arrange(p1, p2, nrow = 1, ncol = 2)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-3](/blog/figure/source/2015-08-28-Tips and tricks/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-28-Tips and tricks/unnamed-chunk-3-1.png)
 
 
 
@@ -187,16 +191,16 @@ A few concepts are good to handle:
 <li> When you do a plot, it is good to build it element by element. </li>
 </ul>
 <li> Whatever your issue, someone on ![stackoverflow](https://stackoverflow.com/) already had the same one.  </li>
-<li> It is better to plot already reshaped data, as plotting more than 10000 points could be slow and probably useless.  </li>
+<li> It is better to plot already reshaped data, as plotting more than 10,000 points could be slow and probably useless.  </li>
 </ul>
 
-When doing an analysis, it is important to keep a track of whatever process you went through. Saving your graphs is a good practice and the ggsave function allows you to do so.
+When doing an analysis, it is important to keep a track of whatever process you went through. Saving your graphs is a good practice and the `ggsave` function allows you to do so.
 
 Generally, I plot and save the distribution of all the main variables plus the multivariate distributions which could be interesting.
 
-It allows to grab an idea on what the dats set looks like.
+It allows to grab an idea on what the data set looks like.
 
-The following code allow to keep the boxplot of the quantitative variables by the qualitative variables.
+The following code create the boxplot of the quantitative variables by the qualitative variables.
 
 
 {% highlight r %}
@@ -224,11 +228,11 @@ res <- mapply(ggsave.diamonds, x.factor, y.numeric)
 
 <h3> Generating code with brew </h3>
 
-I used SAS for a while and really liked the concept of macro, which allow to generate piece of code.
+I used SAS for a while and really liked the concept of macro, the SAS version of function.
 
-In R, the concept of function is a good replacement of the concept of macro. But not everything which is possible with a macro is possibble with a function.
+In R, there is functions. But not everything which is possible with a macro is possibble with a function.
 
-One exemple of difficulties I get was, for a shiny app, to modify the ui part. the function renderUI is good but make your app unecessary messy.
+One exemple of difficulties I get was, for a shiny app, to modify the ui part. The function renderUI is good but make your app unecessary messy. Using the brew package, I had been able to automate an UI modification. 
 
 The brew package is made to create report and text from a template.
 

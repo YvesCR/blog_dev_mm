@@ -1,13 +1,11 @@
 
 ## build the blog:
 
-# check the path. Should be "C:/blog/gen"
+# check the path.
 getwd()
 
-# we don't want split images
-options("base64_images")
-
-
 # serve the blog subfolder:
-servr::jekyll(input = "_source", output = "_posts")
+servr::jekyll(input = "_source", output = "_posts", script = c("Makefile", "build.R"))
+
+
 

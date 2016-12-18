@@ -1,16 +1,16 @@
 ---
 layout: single
-title: "August coding dojo: Choosing the optimal number of cluster"
-categories: [R, Statistic]
+title: "August Coding Dojo: Choosing the Optimal Number of Cluster"
+categories: [Statistic]
 tags: [Clustering, ggplot2, NbClust, R]
 date: 2015-08-18
-description: How to automatically define the optimal number of cluster?
-photo_url: Final_factor.png
+excerpt: How to automatically define the optimal number of cluster when doing clustering?
+teaser: assets/images/Final_factor.png
 ---
 
 At the last coding dojo, the interrogation we get was the following:
 Is it possible to create a function which automatically define the optimal number of cluster?
-As usual, the answer with R is: there is a package to answer this question.
+As usual, the answer with R is: there is a package for that.
 
 <h2> Training data set </h2>
 
@@ -31,13 +31,14 @@ ggplot(data = mat, aes(x = x, y = y)) +
     geom_point( size = 4) 
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-1](/blog/figure/source/2015-08-18-Number_of_Cluster/unnamed-chunk-1-1.png) 
+![plot of chunk unnamed-chunk-1](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-1-1.png)
 
 
 
 <h2> Analysis </h2>
 
-  <h3> Elbow plot </h3>
+<h3> Elbow plot </h3>
+
 Our main inspiration is that post on stackoverflow:
 
 [http://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters](http://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters)
@@ -46,7 +47,7 @@ And the help of the Nbclust package.
 
 
 
-The first way to determine a reasonnable number of cluster that I learnt at school was the elbow plot.
+The first way to determine a reasonnable number of cluster that was taught at school was the elbow plot.
 The concept is to plot the sum of the distance between the centroid of the cluster and the point of the cluster by cluster.
 
 The plot looks like an elbow and the classic rule is to take the number of cluster where the curve begin to flaten. Afterward, each new cluster is not really separated from the others.
@@ -68,11 +69,11 @@ ggplot(data = wss2, aes(x = x, y = wss))+
   ggtitle("Elbow plot")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-4](/blog/figure/source/2015-08-18-Number_of_Cluster/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-4-1.png)
 
 
 
-  <h3> The function NbClust </h3>
+<h3> The function NbClust </h3>
 
 The function NbClust test a consequent set of methods to determine the optimal number of clusters.
 
@@ -94,21 +95,21 @@ res$Best.nc
 
 
 {% highlight text %}
-##                     KL       CH Hartigan     CCC   Scott     Marriot
-## Number_clusters 5.0000   3.0000   3.0000  3.0000  3.0000           3
-## Value_Index     6.5554 199.2098  63.1441 14.9607 65.9178 21080289130
-##                    TrCovW   TraceW Friedman    Rubin Cindex     DB
-## Number_clusters         4      3.0   3.0000   3.0000 6.0000 2.0000
-## Value_Index     890540109 134929.1  15.8781 -10.8347 0.2913 0.5298
-##                 Silhouette   Duda PseudoT2  Beale Ratkowsky     Ball
-## Number_clusters     2.0000 2.0000   2.0000 2.0000    2.0000     3.00
-## Value_Index         0.6672 0.3117  64.0523 2.1351    0.5392 91865.87
+##                      KL       CH Hartigan     CCC   Scott     Marriot
+## Number_clusters  3.0000   3.0000   3.0000  4.0000  3.0000           3
+## Value_Index     12.0232 369.6762 106.8871 15.6251 88.0969 14349490090
+##                    TrCovW TraceW Friedman    Rubin Cindex     DB
+## Number_clusters         6      3   3.0000   3.0000 2.0000 3.0000
+## Value_Index     391824352 138380  40.7887 -20.9064 0.3348 0.4096
+##                 Silhouette   Duda PseudoT2 Beale Ratkowsky     Ball
+## Number_clusters     3.0000 3.0000   3.0000 3.000    3.0000     3.00
+## Value_Index         0.7327 0.6653   9.5597 0.478    0.5381 85346.16
 ##                 PtBiserial Frey McClain   Dunn Hubert SDindex Dindex
-## Number_clusters     2.0000    1  2.0000 2.0000      0   2.000      0
-## Value_Index         0.8202   NA  0.3371 0.4349      0   0.017      0
+## Number_clusters     2.0000    1   2.000 2.0000      0  3.0000      0
+## Value_Index         0.8626   NA   0.288 0.6903      0  0.0178      0
 ##                   SDbw
 ## Number_clusters 3.0000
-## Value_Index     0.1048
+## Value_Index     0.0531
 {% endhighlight %}
 
 Most common value:(Without 0)
@@ -122,10 +123,10 @@ summary(res$Best.nc[1,][res$Best.nc[1,]!= 0])
 
 {% highlight text %}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    1.00    2.00    3.00    2.75    3.00    6.00
+##   1.000   3.000   3.000   2.917   3.000   6.000
 {% endhighlight %}
 
-In the end, the median of all this method is choose. In this case, 2.
+In the end, the median of all these methods is choosed. In this case, 3.
 
 <h2> Result </h2>
 
@@ -139,11 +140,11 @@ ggplot(data = mat, aes(x = x, y = y, colour = factor(res))) +
     geom_point( size = 4)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-10](/blog/figure/source/2015-08-18-Number_of_Cluster/unnamed-chunk-10-1.png) 
+![plot of chunk unnamed-chunk-10](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-10-1.png)
 
 
 
 
 
-There is another approach we didn't had time to look, but which seems promising:
+There is another approach we didn't had time to look at, but which seems promising:
 The package BHC which does bayesian hierarchical clustering could also provide us an insight on the best cluster.
