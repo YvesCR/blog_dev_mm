@@ -142,7 +142,7 @@ gems:
   - jekyll-gist
   - jekyll-feed
   - jemoji
-
+ 
 # mimic GitHub Pages with --safe
 whitelist:
   - jekyll-paginate

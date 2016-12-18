@@ -4,7 +4,7 @@ main:
     url: /about/index.html
   - title: "Grid View"
     url: /portfolio/
-  # - title: "Sample Posts"
-    # url: /year-archive/
-  # - title: "Sample Collections"
-    # url: /collection-archive/
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/

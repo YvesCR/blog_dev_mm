@@ -179,7 +179,7 @@ p2 <- ggplot(aes(x = carat, y = price, colour = clarity), data = diamonds.dt) +
 grid.arrange(p1, p2, nrow = 1, ncol = 2)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-3](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-28-Tips and tricks/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-3](http://data-laborer.eu/assets/images/figures/source/2015-08-28-Tips and tricks/unnamed-chunk-3-1.png)
 
 
 

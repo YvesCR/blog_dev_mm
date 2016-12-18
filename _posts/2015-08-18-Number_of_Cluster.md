@@ -31,7 +31,7 @@ ggplot(data = mat, aes(x = x, y = y)) +
     geom_point( size = 4) 
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-1](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-1-1.png)
+![plot of chunk unnamed-chunk-1](http://data-laborer.eu/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-1-1.png)
 
 
 
@@ -69,7 +69,7 @@ ggplot(data = wss2, aes(x = x, y = wss))+
   ggtitle("Elbow plot")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-4](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](http://data-laborer.eu/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-4-1.png)
 
 
 
@@ -95,21 +95,21 @@ res$Best.nc
 
 
 {% highlight text %}
-##                      KL       CH Hartigan     CCC   Scott     Marriot
-## Number_clusters  3.0000   3.0000   3.0000  4.0000  3.0000           3
-## Value_Index     12.0232 369.6762 106.8871 15.6251 88.0969 14349490090
-##                    TrCovW TraceW Friedman    Rubin Cindex     DB
-## Number_clusters         6      3   3.0000   3.0000 2.0000 3.0000
-## Value_Index     391824352 138380  40.7887 -20.9064 0.3348 0.4096
-##                 Silhouette   Duda PseudoT2 Beale Ratkowsky     Ball
-## Number_clusters     3.0000 3.0000   3.0000 3.000    3.0000     3.00
-## Value_Index         0.7327 0.6653   9.5597 0.478    0.5381 85346.16
+##                     KL       CH Hartigan     CCC   Scott     Marriot
+## Number_clusters 3.0000   3.0000   3.0000  3.0000  3.0000           3
+## Value_Index     8.7635 300.0656  86.9151 18.1358 75.9352 10591984522
+##                    TrCovW   TraceW Friedman    Rubin Cindex     DB
+## Number_clusters         3      3.0   4.0000   3.0000 2.0000 2.0000
+## Value_Index     767774491 126814.4  39.3377 -15.8557 0.2708 0.4622
+##                 Silhouette   Duda PseudoT2   Beale Ratkowsky     Ball
+## Number_clusters     3.0000 2.0000   2.0000  3.0000    2.0000     3.00
+## Value_Index         0.7122 0.2479  87.9946 -0.3846    0.5502 81386.75
 ##                 PtBiserial Frey McClain   Dunn Hubert SDindex Dindex
-## Number_clusters     2.0000    1   2.000 2.0000      0  3.0000      0
-## Value_Index         0.8626   NA   0.288 0.6903      0  0.0178      0
+## Number_clusters     2.0000    1  2.0000 2.0000      0  2.0000      0
+## Value_Index         0.8678   NA  0.2981 0.4743      0  0.0154      0
 ##                   SDbw
-## Number_clusters 3.0000
-## Value_Index     0.0531
+## Number_clusters 6.0000
+## Value_Index     0.0678
 {% endhighlight %}
 
 Most common value:(Without 0)
@@ -123,7 +123,7 @@ summary(res$Best.nc[1,][res$Best.nc[1,]!= 0])
 
 {% highlight text %}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   1.000   3.000   3.000   2.917   3.000   6.000
+##   1.000   2.000   3.000   2.708   3.000   6.000
 {% endhighlight %}
 
 In the end, the median of all these methods is choosed. In this case, 3.
@@ -140,7 +140,7 @@ ggplot(data = mat, aes(x = x, y = y, colour = factor(res))) +
     geom_point( size = 4)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-10](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](http://data-laborer.eu/assets/images/figures/source/2015-08-18-Number_of_Cluster/unnamed-chunk-10-1.png)
 
 
 

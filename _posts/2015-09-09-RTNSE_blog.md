@@ -111,7 +111,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne)) +
   ggtitle("Raw plot")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-1.png)
 
 {% highlight r %}
 # clarity
@@ -119,7 +119,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = as.factor(clar
   geom_point() +   theme_classic() +  ggtitle("Clarity")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-2.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-2.png)
 
 {% highlight r %}
 # cut
@@ -127,7 +127,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = as.factor(cut2
   geom_point() +   theme_classic() +  ggtitle("Cut")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-3.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-3.png)
 
 {% highlight r %}
 # price
@@ -135,7 +135,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = price)) +
   geom_point() +   theme_classic() +  ggtitle("Price")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-4.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-4.png)
 
 {% highlight r %}
 # color
@@ -143,7 +143,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = as.factor(colo
   geom_point() +   theme_classic() +  ggtitle("Color")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-5.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-5.png)
 
 {% highlight r %}
 # carat
@@ -151,7 +151,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = carat)) +
   geom_point() +   theme_classic() +  ggtitle("Carat")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-6.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-6.png)
 
 {% highlight r %}
 # x
@@ -159,7 +159,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = x)) +
   geom_point() +   theme_classic() +  ggtitle("X")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-7.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-7.png)
 
 {% highlight r %}
 # y
@@ -167,7 +167,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = y)) +
   geom_point() +   theme_classic() +  ggtitle("Y")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-8.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-8.png)
 
 {% highlight r %}
 # z
@@ -175,7 +175,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = z)) +
   geom_point() +   theme_classic() +  ggtitle("Z")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-9.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-9.png)
 
 {% highlight r %}
 # depth
@@ -183,7 +183,7 @@ ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = depth)) +
   geom_point() +   theme_classic() +  ggtitle("Depth")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-10.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-10.png)
 
 <h4> Titanic data set </h4>
 
@@ -233,7 +233,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne)) +
   geom_point() +   theme_classic() +  ggtitle("Raw graph")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-9](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-9-1.png)
+![plot of chunk unnamed-chunk-9](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-9-1.png)
 
 The 2D representation create clusters easily identifiable. Now, the question is: does these clusters make sense looking at the survivor variable.
 
@@ -244,7 +244,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Survived2)) 
   geom_point() +   theme_classic() +  ggtitle("Survivors")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-10](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-10-1.png)
 
 The survivors are not that well separated, but we could see a few groups which are well defined.
 
@@ -255,7 +255,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Age)) +
   geom_point() +   theme_classic() +  ggtitle("Age")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-1.png)
 
 {% highlight r %}
 # Pclass
@@ -263,7 +263,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = as.factor(Pc
   geom_point() +   theme_classic() +  ggtitle("Class")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-2.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-2.png)
 
 {% highlight r %}
 # Sex
@@ -271,7 +271,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = as.factor(fl
   geom_point() +   theme_classic() +  ggtitle("Sex")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-3.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-3.png)
 
 {% highlight r %}
 # Parch
@@ -279,7 +279,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Parch))  +
   geom_point() +   theme_classic() +  ggtitle("Number of Parents/Children Aboard")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-4.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-4.png)
 
 {% highlight r %}
 # Fare
@@ -287,7 +287,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Fare))  +
   geom_point() +   theme_classic() +  ggtitle("Fare")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-5.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-5.png)
 
 {% highlight r %}
 # SibSp
@@ -295,7 +295,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = SibSp))  +
   geom_point() +   theme_classic() +  ggtitle("Number of Siblings/Spouses Aboard")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-6.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-6.png)
 
 {% highlight r %}
 # flg.emb.s
@@ -303,7 +303,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = flg.emb.s)) 
   geom_point() +   theme_classic() +  ggtitle("Embarkation at Southampton")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-7.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-7.png)
 
 {% highlight r %}
 # flg.emb.c
@@ -311,7 +311,7 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = flg.emb.c)) 
   geom_point() +   theme_classic() +  ggtitle("Embarkation at Cherbourg")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-8.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-8.png)
 
 {% highlight r %}
 # flg.emb.q
@@ -319,4 +319,4 @@ ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = flg.emb.q)) 
   geom_point() +   theme_classic() +  ggtitle("Embarkation at Queenstown")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-9.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-9.png)
