@@ -1,11 +1,11 @@
 ---
-layout: post
-title: "New Ropencorporate package"
+layout: single
+title: "Ropencorporate: A Package to access Opencorporate API"
 categories: [hack]
 tags: [R, open corporates, package]
 date: 2016-05-02
-description: Presentation of the first version of the Ropencorporate package
-photo_url: Abstract-art-britto-qb140.jpg
+excerpt: Presentation of the version 0.1 of the Ropencorporate package
+photo_url: assets/images/Abstract-art-britto-qb140.jpg
 ---
 
 A couple of month ago, I went to the [London open data mission](http://www.meetup.com/fr-FR/London-Open-Data-Missions/) meetup in Shoreditch. It is a meetup organized by the company [Open corporates](https://opencorporates.com/), a company which gather officials documents on company creation and dissolution and make these documents available through an [API](http://api.opencorporates.com/).
@@ -72,7 +72,7 @@ The result we get is a bit messy: The same company could appear under multiple n
 For a complete cleaning, a good option is to use [open refine](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth) to do this work.
 But it is not the point here, so we just use the fingerprint method to simplify the name. For that, we use the `fingerprint.func` function plus a bit of work to keep a non formatted version of the name. 
 
-```{r}
+```{r, results='asis'}
 ## What I want: the most frequent occurence of the name
 
 # First, we use the fingerprint method to normalise the name

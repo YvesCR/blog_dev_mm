@@ -1,11 +1,11 @@
 ---
 layout: single
-title: "Furthest point from the subway in London with Voronoi"
-categories: [ Data visualisation, Statistic]
-tags: [alphahull, data visualisation, geometry, R]
+title: "How Far am I From the Next Tube Station?"
+categories: [Data visualisation]
+tags: [alphahull, data visualisation, geometry, R, Statistic]
 date: 2015-07-16
-description: Finding the furthest point from the subway in London with Voronoi
-photo_url: London3.png
+excerpt: How to find the furthest point from a London tube station with Voronoi
+teaser: assets/images/London3.png
 ---
 
 A question was uplifted at the last R coding dojo. What is the location in central London which is the furthest from the subway?
@@ -27,11 +27,11 @@ In this blog post, I try to override this issue.
 
 <h1> Method </h1>
 
-In the alphahull package, the ashape function allow to create a close constraint, based on voronoi. It allow to calculate both the constraint and the voronoi vertices.
+In the alphahull package, the `ashape` function allows to create a close constraint, based on voronoi. It calculates both the constraint and the voronoi vertices.
 
-The function pnt.in.poly of the SDMTools allow to flag the voronoi vertices which are inside the constraint.
+The function `pnt.in.poly` of the SDMTools allow to flag the voronoi vertices which are inside the constraint.
 
-Combining both, allow me to create a constraint voronoi diagram in which I could look for the point the furthest from any subway station.
+Combining both allows me to create a constraint Voronoi diagram in which I could look for the point the furthest from any subway station.
 
 ![london gif ]({{ site.baseurl }}/image/London.gif) 
 
@@ -40,7 +40,7 @@ Combining both, allow me to create a constraint voronoi diagram in which I could
 <h3> Libraries, data, raw map </h3>
 
 Coordinates of stations could be found on the TFL website.
-The function get_map() allows to plot a map in a really efficient way and quite fast.
+The function `get_map()` plot a map in a really efficient way and quite fast.
 
 
 {% highlight r %}
@@ -48,8 +48,9 @@ library(ggmap)
 library(alphahull)
 library(SDMTools) 
 library(devtools)
-library(animation) # install.packages("animation")
-library(ImageMagick) #install_github("ImageMagick")
+library(animation)
+library(ImageMagick)
+
 # load the libraries:
 l <- lapply(c("data.table", "alphahull", "ggmap", "SDMTools", "sp"), require, character.only = T)
 
@@ -94,16 +95,15 @@ plot.no.map.voronoi <- zones.london +
 plot.no.map.voronoi
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-3](/blog/figure/source/2015-07-16-Voronoi_station/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-3-1.png)
 
 Now, we have the constraint and the voronoi diagram on all the subways station of the zone 1.
 
-<h3> Keep the voronoi summits inside the constraint </h3>
+<h3> Keep voronoi summits inside the constraint </h3>
 
-As I want only the voronoi summit inside the constraint, I use the function pnt.in.poly to flag summit outside the constraint.
+As I want to keep only the voronoi summit inside the constraint, I use the function `pnt.in.poly` to flag summit outside the constraint.
 
-The function take only the ordered summit of the constraint as the polygon. The first loop allow to reorder the summits.
-
+The function takes only the ordered summit of the constraint as the polygon. The first loop reorder the summits.
 
 
 {% highlight r %}
@@ -150,12 +150,12 @@ zones.london.vor <- zones.london +
 zones.london.vor
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-4](/blog/figure/source/2015-07-16-Voronoi_station/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-4-1.png)
 
 <h3>  Finding the furthest point from the subway </h3>
 
 I am looking for the voronoi summit the furthest from any subway station.
-I use the spDistsN1 function to calculate the distance on a sphere.   
+I use the `spDistsN1` function to calculate the distance on a sphere.   
 
 
 {% highlight r %}
@@ -179,7 +179,7 @@ zones.london.point <- zones.london.vor +
 zones.london.point
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](/blog/figure/source/2015-07-16-Voronoi_station/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](http://data-laborer.eu/blog_dev_mm/assets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-5-1.png)
 
 In the end, it appears that the furthest point from the subway in London is near the Albert memorial. If you already find yourself hanging there and thinking that the next subway station was quite far, be rassured, it's definitely normal. :)
 

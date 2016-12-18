@@ -1,0 +1,95 @@
+---
+layout: single
+title: "Dashboarding with Flexdashboard and Opencpu"
+categories: [R]
+tags: [R, js, opencpu]
+date: 2016-10-31
+excerpt: How to use opencpu as a back end for flexdashboard
+teaser: assets/images/flexocpu.png
+---
+
+## Abstract
+
+In this blog post, I present an exemple of mix use of opencpu and flexdashboard. 
+Opencpu is used as the back end of the dashboard and flexdashboard as the front end.
+
+A live demonstration is available [here](https://yvescr.ocpu.io/flexocpu/www/ ).
+
+The originality lie in the fact that the js to call the api is coded in the Rmd. This allows me to concentrate all the front-end code in one script, the rmd.
+
+The process to create the dashboard is the following:
+
+- Create the R package, the back-end functions
+- Create a flexdashboard containing the html structure and js code
+
+A script is used to render the flexdashboard, build the package and serve the updated dashboard.
+
+## Opencpu
+
+[Opencpu](opencpu.org) is a system that provides a reliable and interoperable HTTP API for data analysis based on R. It allows to easily implement R in a production environment through the use of an API to serve R scripts structured as a package.
+
+At first, it is a complex subject, as the concept of API needs to be understood, which is not a native knowledge for a lot of analysts.
+
+To ease up beginners, I advice to read these two resources, which describe opencpu case studies:
+
+* [Personnalised results with opencpu](https://medium.com/@TheLaddersEng/data-scientists-toolbox-for-data-infrastructure-i-e25391f145a3#.dg3csfgf1)
+* [Prefetch url with opencpu](https://earlconf.com/london/speaker/hxcuw)
+
+To summarize, opencpu allows to run R scripts on demand.
+
+There is alternatives to opencpu.
+At the last EARL conference, two speakers were using different methods to use R as a real time back-end :
+
+* [Real-time scoring in marketplace](https://earlconf.com/london/speaker/6zbc3)
+* [Real-time predictive analytic in medical claim processing](https://earlconf.com/london/speaker/8oj31)
+
+In the first case, an API had been built in Ruby to wrap R code. In the second case, a R script is called in batch by a script in java.
+
+The main caveat of opencpu is the security: it is easy to inject code and uneasy to hide data. I use openCPU behind a corporate firewall so I don't have to worry too much about how secure it can be.
+
+## Flexdashboard and shiny
+
+[Flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/) is a package by Rstudio which allows to do a dashboard with Rmarkdown.
+
+You can create a standalone document where the interactivity is limited at the htmlwidget packages level.
+
+You can, for exemple, include a leaflet map, a D3 chart or a plotly chart.
+
+For more complex customization, the traditional way is to use shiny as the back-end to create fully customized dashboard; sometimes a good alternative to Tableau or BO.
+
+## Using opencpu with flexdashboard
+
+### Creation of the stack
+
+To create the dashboard, the first thing to do is to code the back-end: the R package which is served by opencpu. The front-end come in second place.
+
+The main reference for that is the book [R packages](r-pkgs.had.co.nz) by Hadley Wickham.
+
+To test your package, the easiest way is to use the [OpenCPU API explorer](https://public.opencpu.org/ocpu/test/).
+You can enter your parameter and get the live result in a more fashion way than with a call with cURL.
+
+In my exemple, functions return either a json, a R plot or an html file.
+
+For the front-end, I create two scripts:
+
+- A script "Index.Rmd", which content the flexdashboard structure of my dashboard.
+    * The script need to be rendered as "Index.html" in the inst/www folder.
+- A script "setup_package.R" which contain the steps to update the package.
+    * The name can be different.
+
+The Rmd script use the flexdashboard structure but most of the content is js code to get the API content or js code to produce the input buttons. It is a mix of html, R and js code.
+
+### Update the dashboard
+
+When I want to modify my code, I use the script "setup_package.R" to update the dashboard. The process contain 4 steps:
+
+* Render the Rmarkdown file "Index.Rmd" to "Index.html" in inst/www
+* Build the package
+* Install the package
+* Open the browser at the URL of the dashboard.
+
+In addition, the first time that the dashboard is updated, the opencpu server need to be started.
+
+On my exemple, the whole process take less than 10 sec, which is enough to keep my attention focused on the task.
+
+All the code could be found on my github account, [here](https://github.com/YvesCR/flexocpu).
