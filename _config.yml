@@ -15,7 +15,7 @@ title_separator          : "-"
 name                     : "Yves Crutain"
 description              : "Personnal blog of a data scientist"
 url                      : "https://data-laborer.eu"
-baseurl                  : "/blog_dev_mm"
+baseurl                  : ""
 repository               : "YvesCR/blog_dev_mm"
 teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
 # breadcrumbs            : false # true, false (default)
@@ -130,8 +130,6 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-paginate: 8 # amount of posts to show
-paginate_path: /page:num/
 timezone: Europe/Belfast
 
 
