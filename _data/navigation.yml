@@ -2,7 +2,7 @@
 main:
   - title: "About"
     url: /about/index.html
-  - title: "Grid View"
+  - title: "List View"
     url: /portfolio/
   - title: "Categories"
     url: /categories/
