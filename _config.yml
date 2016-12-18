@@ -15,7 +15,7 @@ title_separator          : "-"
 name                     : "Yves Crutain"
 description              : "Personnal blog of a data scientist"
 url                      : "https://data-laborer.eu"
-baseurl                  : "/blog_dev_mm/"
+baseurl                  : "/blog_dev_mm"
 repository               : "YvesCR/blog_dev_mm"
 teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
 # breadcrumbs            : false # true, false (default)
