@@ -67,7 +67,7 @@ analytics:
 author:
   name             : "Yves Crutain"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : 
+  bio              : "Data Scientist: Insight harvester, R Addict, python junky AND foodie. My favourite stack: SQL server + R + opencpu"
   location         : "London"
   email            : "yves.crutain@gmail.com"
   uri              : "data-laborer.eu"
