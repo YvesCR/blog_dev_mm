@@ -157,7 +157,6 @@ sass:
 permalink: /:categories/:title/
 timezone: Europe/Belfast
 
-
 # Plugins
 gems:
   - jekyll-paginate
@@ -165,7 +164,7 @@ gems:
   - jekyll-gist
   - jekyll-feed
   - jemoji
- 
+
 # mimic GitHub Pages with --safe
 whitelist:
   - jekyll-paginate

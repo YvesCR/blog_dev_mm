@@ -6,6 +6,7 @@ tags: [R, opencpu, package, js]
 date: 2016-11-27
 excerpt: Short exemple of how to include R output in a blog post with opencpu
 teaser: assets/images/TheRapeofEuropa.png
+theme: minima
 ---
 
 Todays blog post is more a note than a full blog post.
