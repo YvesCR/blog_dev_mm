@@ -8,6 +8,8 @@ excerpt: Short exemple of how to include R output in a blog post with opencpu
 teaser: assets/images/TheRapeofEuropa.png
 ---
 
+<div class="post_ocpu" style="height: 1100px">
+
 Todays blog post is more a note than a full blog post.
 
 On my previous post, opencpu was used to create a back-end environment for a flexdashboard dashboard.
@@ -123,3 +125,5 @@ You can enter any integer between 1 and 544:
 <!--html_preserve--><div id="plotdiv" style="height: 270px"></div><!--/html_preserve-->
 
 The same can be done to create dynamic json or any htmlwidget output.
+
+</div>
