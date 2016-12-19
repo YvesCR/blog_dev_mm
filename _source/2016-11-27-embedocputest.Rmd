@@ -1,11 +1,11 @@
 ---
-layout: post
-title: "Include R output in your blog page with opencpu"
-categories: [hack, js]
-tags: [R, opencpu, package]
+layout: single
+title: "Include R Output in your Blog Pages with Opencpu"
+categories: [hack]
+tags: [R, opencpu, package, js]
 date: 2016-11-27
-description: short exemple of how to include oprncpu output in a blog post
-photo_url: TheRapeofEuropa.png
+excerpt: Short exemple of how to include R output in a blog post with opencpu
+teaser: assets/images/TheRapeofEuropa.png
 ---
 
 Todays blog post is more a note than a full blog post.
