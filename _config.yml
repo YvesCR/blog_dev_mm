@@ -27,7 +27,7 @@ name                     : "Yves Crutain"
 description              : "Personnal blog of a data scientist"
 url                      : "https://data-laborer.eu"
 baseurl                  : ""
-repository               : YvesCR/blog_dev_mm
+repository               : YvesCR/blog
 teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
 theme: minimal-mistakes-jekyll
 # breadcrumbs            : false # true, false (default)

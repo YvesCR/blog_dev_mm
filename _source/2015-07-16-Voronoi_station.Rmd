@@ -12,7 +12,7 @@ A question was uplifted at the last R coding dojo. What is the location in centr
 
 The first bit of code of this question was made at the LondonR coding dojo, here:
 
-https://github.com/London-R-Dojo/Dojo-repo/tree/master/July-2015-Dojo
+[https://github.com/London-R-Dojo/Dojo-repo/tree/master/July-2015-Dojo](https://github.com/London-R-Dojo/Dojo-repo/tree/master/July-2015-Dojo)
 
 Two approach was used to reply to this question:
 
@@ -72,13 +72,12 @@ zones.london <- zones.london.plot12 +
 
 
 ```{r, include=FALSE, warning = F, fig.width=12}
-setwd("C:/blog/gen")
 # load the libraries:
 l <- lapply(c("data.table", "alphahull", "ggmap", "SDMTools", "sp", "grid"), require, character.only = T)
 
 # load the da
-load(file = "data/London12.Rdata") # london12
-coord.station <- fread("data/tfl.stations.csv")
+load(file = "../data/London12.Rdata") # london12
+coord.station <- fread("../data/tfl.stations.csv")
 
   # plot zones 1:
 zones.london.plot12 <- ggmap(london12) 
