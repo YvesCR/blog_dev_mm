@@ -1,13 +1,12 @@
 ---
-layout: post
-title: "Explore officers with Ropencorporate"
+layout: single
+title: "Explore Company Officers of EDF with Ropencorporate"
 categories: [hack]
 tags: [R, open corporates, package]
 date: 2016-05-22
-description: late add of the Ropencorporate package
-photo_url: logog_oc.png
+excerpt: Exemple of how to use the Ropencorporate package
+teaser: assets/images/logog_oc.png
 ---
-
 
 This article follow a [first article](http://data-laborer.eu/2016/05/Presentation_of_the_Ropencorporate_package.html) on how to extract information on a specific company from the [opencorporate](http://api.opencorporates.com/) database. 
 

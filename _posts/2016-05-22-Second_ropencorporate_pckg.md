@@ -1,13 +1,12 @@
 ---
-layout: post
-title: "Explore officers with Ropencorporate"
+layout: single
+title: "Explore Company Officers of EDF with Ropencorporate"
 categories: [hack]
 tags: [R, open corporates, package]
 date: 2016-05-22
-description: late add of the Ropencorporate package
-photo_url: logog_oc.png
+excerpt: Exemple of how to use the Ropencorporate package
+teaser: assets/images/logog_oc.png
 ---
-
 
 This article follow a [first article](http://data-laborer.eu/2016/05/Presentation_of_the_Ropencorporate_package.html) on how to extract information on a specific company from the [opencorporate](http://api.opencorporates.com/) database. 
 
@@ -23,46 +22,52 @@ The question that we could answer, here, is how to find the key officers of EDF?
 
 ## Initialisation
 
-```{r setup, include=FALSE}
-#token:
-token <- "CzFKSqWPpAUEiBdRqMxw"
 
-# term
-term <- "edf"
-```
 
-```{r, include=TRUE, eval=TRUE, echo=TRUE, warning=FALSE}
-library(Ropencorporate, quietly = T)
+
+<pre><code class="prettyprint ">library(Ropencorporate, quietly = T)
 library(data.table)
 library(DT)
 library(stringr)
 library(stringi)
-library(networkD3, quietly = T, warn.conflicts = F)
-```
+library(networkD3, quietly = T, warn.conflicts = F)</code></pre>
 
 First, we load the details of all the companies related to the term "EDF" created in the first article.
 
-```{r}
-load(file = paste0("data/res_oc_", term, ".rda")) # res.oc
-```
+
+<pre><code class="prettyprint ">load(file = paste0(&quot;data/res_oc_&quot;, term, &quot;.rda&quot;)) # res.oc</code></pre>
+
+
+
+<pre><code>## Warning in readChar(con, 5L, useBytes = TRUE): impossible d'ouvrir le
+## fichier compressé 'data/res_oc_edf.rda', cause probable : 'No such file or
+## directory'
+</code></pre>
+
+
+
+<pre><code>## Error in readChar(con, 5L, useBytes = TRUE): impossible d'ouvrir la connexion
+</code></pre>
 
 Then we query details of the companies, with the help of the function `get.comp.number`.
 
-```{r, eval = FALSE}
-company.number <- res.oc$oc.dt[, company.number]
-jurisdiction.code <- res.oc$oc.dt[, jurisdiction.code]
-company.out.l <- get.comp.number(company.number, jurisdiction.code)
-```
 
-```{r, echo = F, eval = F}
-# not displayed: save the data
-save(company.out.l, file = paste0("data/company_result_query_id_", term, ".rda"))
-```
+<pre><code class="prettyprint ">company.number &lt;- res.oc$oc.dt[, company.number]
+jurisdiction.code &lt;- res.oc$oc.dt[, jurisdiction.code]
+company.out.l &lt;- get.comp.number(company.number, jurisdiction.code)</code></pre>
 
-```{r, echo = F}
-# not displayed: load the data
-load(file = paste0("data/company_result_query_id_", term, ".rda")) # company.out.l
-```
+
+
+
+<pre><code>## Warning in readChar(con, 5L, useBytes = TRUE): impossible d'ouvrir le
+## fichier compressé 'data/company_result_query_id_edf.rda', cause probable :
+## 'No such file or directory'
+</code></pre>
+
+
+
+<pre><code>## Error in readChar(con, 5L, useBytes = TRUE): impossible d'ouvrir la connexion
+</code></pre>
 
 The result of the function is a list with 4 data-table (or data-frame if the package `data.table` is not loaded). The first table give details of companies and the second details of officers.
 
@@ -75,29 +80,55 @@ A project here could be to create a scarcity score per name and surname. That wa
 
 Some cleaning among the names could nevertheless be done. For exemple, we could get rid of the initial of the second name. In that case, we loose a bit of precision in the result.
 
-```{r}
-officers.comp.dt <- company.out.l$officers.comp.dt
 
-# get rid of second name abreviation
-officers.comp.dt[, name.clean := gsub("([ ][A-Z][/.])", "", stri_trans_totitle(tolower(name)))]
+<pre><code class="prettyprint ">officers.comp.dt &lt;- company.out.l$officers.comp.dt</code></pre>
 
-# Clean officers title
-officers.comp.dt[, position := stri_trans_totitle(tolower(position))]
-```
+
+
+<pre><code>## Error in eval(expr, envir, enclos): objet 'company.out.l' introuvable
+</code></pre>
+
+
+
+<pre><code class="prettyprint "># get rid of second name abreviation
+officers.comp.dt[, name.clean := gsub(&quot;([ ][A-Z][/.])&quot;, &quot;&quot;, stri_trans_totitle(tolower(name)))]</code></pre>
+
+
+
+<pre><code>## Error in eval(expr, envir, enclos): objet 'officers.comp.dt' introuvable
+</code></pre>
+
+
+
+<pre><code class="prettyprint "># Clean officers title
+officers.comp.dt[, position := stri_trans_totitle(tolower(position))]</code></pre>
+
+
+
+<pre><code>## Error in eval(expr, envir, enclos): objet 'officers.comp.dt' introuvable
+</code></pre>
 
 ## Simple analysis
 
 From a simple count, we can see that a lot of companies have, as officer, "CORPORATION SERVICE COMPANY". It is a large [Registered Agent service companies](https://en.wikipedia.org/wiki/Corporation_Service_Company) situated in the Delaware.
 
-```{r}
-datatable(officers.comp.dt[, .N, by = c("name.clean", "position")][order(N, decreasing = T)])
-```
+
+<pre><code class="prettyprint ">datatable(officers.comp.dt[, .N, by = c(&quot;name.clean&quot;, &quot;position&quot;)][order(N, decreasing = T)])</code></pre>
+
+
+
+<pre><code>## Error in base::rownames(data): objet 'officers.comp.dt' introuvable
+</code></pre>
 
 For companies registered in the UK, we have the nationality of the officers. Here, we could see that companies are mainly represented by British and Frenchs officers.
 
-```{r}
-datatable(officers.comp.dt[, .N, by = "nationality"][order(N, decreasing = T)])
-```
+
+<pre><code class="prettyprint ">datatable(officers.comp.dt[, .N, by = &quot;nationality&quot;][order(N, decreasing = T)])</code></pre>
+
+
+
+<pre><code>## Error in base::rownames(data): objet 'officers.comp.dt' introuvable
+</code></pre>
 
 ## Graph analysis
 
@@ -107,58 +138,56 @@ Now, what we want to represent is the link between officers and companies.
 For that, we use the `forceNetwork` function, which allows to do a force directed network graph (logic).
 Here, we consider that the same officer with multiple positions as two nodes, as we want to give a color for each position.
 
-```{r, eval=FALSE}
-company.id.dt <- company.out.l$company.id.dt
+
+<pre><code class="prettyprint ">company.id.dt &lt;- company.out.l$company.id.dt
 
 # merge both tables:
-comp.officers <- merge(officers.comp.dt, company.id.dt[
+comp.officers &lt;- merge(officers.comp.dt, company.id.dt[
 , list(jurisdiction.code, company.number, name.company = name)]
-, by = c("jurisdiction.code", "company.number"))
+, by = c(&quot;jurisdiction.code&quot;, &quot;company.number&quot;))
 
 # clear position: if less than 20 of a position, it goes into Other
-comp.officers[, position2 := ifelse(.N < 20, "Other", position), by = "position"]
-comp.officers[, name2 := paste0(name.clean, ", ", position2)]
+comp.officers[, position2 := ifelse(.N &lt; 20, &quot;Other&quot;, position), by = &quot;position&quot;]
+comp.officers[, name2 := paste0(name.clean, &quot;, &quot;, position2)]
 
 # nodes:
-nodes.c <- unique(c(comp.officers[, name2], comp.officers[, name.company]))
-node0 <- data.frame(ID = 0:(length(nodes.c) - 1)
+nodes.c &lt;- unique(c(comp.officers[, name2], comp.officers[, name.company]))
+node0 &lt;- data.frame(ID = 0:(length(nodes.c) - 1)
                     , name = nodes.c, size = 25
                     , stringsAsFactors = F)
 
 # nodes with group: one color per position and one for company
-nodes.with.group <- merge(node0
+nodes.with.group &lt;- merge(node0
       , unique(comp.officers[, list(name2
         , group = as.numeric(as.factor(name2)))])
-      , by.x = "name", by.y = "name2", all.x = T)
+      , by.x = &quot;name&quot;, by.y = &quot;name2&quot;, all.x = T)
 
 # put a high value for company for the group and the size
-nodes.with.group$group[is.na(nodes.with.group$group)] <- 30
-nodes.with.group$size[is.na(nodes.with.group$group)] <- 50
+nodes.with.group$group[is.na(nodes.with.group$group)] &lt;- 30
+nodes.with.group$size[is.na(nodes.with.group$group)] &lt;- 50
 
 # sort the table
-node <- nodes.with.group[order(nodes.with.group$ID), ]
+node &lt;- nodes.with.group[order(nodes.with.group$ID), ]
 
 # links 
-links0 <- merge(
+links0 &lt;- merge(
   merge(
     comp.officers[!(is.na(name.clean)|is.na(name.company))
-                  , list(value = .N), by = c("name2", "name.company")]
-    , node0, by.x = "name2", by.y = "name", all.x = T)
-  , node0, by.x = "name.company", by.y = "name", all.x = T)
+                  , list(value = .N), by = c(&quot;name2&quot;, &quot;name.company&quot;)]
+    , node0, by.x = &quot;name2&quot;, by.y = &quot;name&quot;, all.x = T)
+  , node0, by.x = &quot;name.company&quot;, by.y = &quot;name&quot;, all.x = T)
 
-links <- data.table(links0[, list(source = ID.x, target = ID.y
-                      , value = value)])
-```
+links &lt;- data.table(links0[, list(source = ID.x, target = ID.y
+                      , value = value)])</code></pre>
 
 ### Graph of companies and offers by position 
 
 The final result is a huge graph, of nearly 1Mb. You could find the live version [here](http://data-laborer.eu/Pages/Force_field_officers.html), but try not to open it with a smartphone or a low frequency connexion.
 
-```{r, fig.height=20, fig.width=15, eval = F, echo = T}
-forceNetwork(Links = links, Nodes = node, Source = "source",
-             Target = "target", Value = "value", NodeID = "name",
-             Group = "group", opacity = 1, zoom = TRUE)
-```
+
+<pre><code class="prettyprint ">forceNetwork(Links = links, Nodes = node, Source = &quot;source&quot;,
+             Target = &quot;target&quot;, Value = &quot;value&quot;, NodeID = &quot;name&quot;,
+             Group = &quot;group&quot;, opacity = 1, zoom = TRUE)</code></pre>
 
 For the article, an image is enough.
 ![Full force field](http://data-laborer.eu/assets/images/special/Open_corporqte_edf_officers_force_network.png)
@@ -176,50 +205,48 @@ So that time, we want to represent one point per officer and company, but with a
 
 The code is a bit different, here:
 
-```{r, echo = T, eval = F}
-comp.officers[, jurisdiction.code2 := ifelse(substring(jurisdiction.code, 1, 2) %in% c("us", "ca")
+
+<pre><code class="prettyprint ">comp.officers[, jurisdiction.code2 := ifelse(substring(jurisdiction.code, 1, 2) %in% c(&quot;us&quot;, &quot;ca&quot;)
                           , substring(jurisdiction.code, 1, 2), jurisdiction.code)]
-comp.officers[, jurisdiction.code3 := ifelse(.N < 5, "Other", jurisdiction.code2), by = "jurisdiction.code2"]
-comp.officers[, name.company2 := paste0(name.company, ", ", jurisdiction.code3)]
+comp.officers[, jurisdiction.code3 := ifelse(.N &lt; 5, &quot;Other&quot;, jurisdiction.code2), by = &quot;jurisdiction.code2&quot;]
+comp.officers[, name.company2 := paste0(name.company, &quot;, &quot;, jurisdiction.code3)]
 
 # nodes:
-nodes.c <- unique(c(comp.officers[, name.clean], comp.officers[, name.company2]))
-node0 <- data.frame(ID = 0:(length(nodes.c) - 1)
+nodes.c &lt;- unique(c(comp.officers[, name.clean], comp.officers[, name.company2]))
+node0 &lt;- data.frame(ID = 0:(length(nodes.c) - 1)
                     , name = nodes.c, size = 25
                     , stringsAsFactors = F)
 
 # nodes with group: one color per jurisdiction and one for officers
-nodes.with.group2 <- merge(node0
+nodes.with.group2 &lt;- merge(node0
       , unique(comp.officers[, list(name.company2 
         , group = as.numeric(as.factor(jurisdiction.code3)))])
-      , by.x = "name", by.y = "name.company2", all.x = T)
+      , by.x = &quot;name&quot;, by.y = &quot;name.company2&quot;, all.x = T)
 
 # put a high value for officers for the group and the size
-nodes.with.group2$group[is.na(nodes.with.group2$group)] <- 30
-nodes.with.group2$size[is.na(nodes.with.group2$group)] <- 50
+nodes.with.group2$group[is.na(nodes.with.group2$group)] &lt;- 30
+nodes.with.group2$size[is.na(nodes.with.group2$group)] &lt;- 50
 
 # sort the table
-node2 <- nodes.with.group2[order(nodes.with.group2$ID), ]
+node2 &lt;- nodes.with.group2[order(nodes.with.group2$ID), ]
 
 # links 
-links.init <- merge(
+links.init &lt;- merge(
   merge(
-    comp.officers[, list(value = .N), by = c("name.clean", "name.company2")]
-    , node0, by.x = "name.company2", by.y = "name", all.x = T)
-  , node0, by.x = "name.clean", by.y = "name", all.x = T)
+    comp.officers[, list(value = .N), by = c(&quot;name.clean&quot;, &quot;name.company2&quot;)]
+    , node0, by.x = &quot;name.company2&quot;, by.y = &quot;name&quot;, all.x = T)
+  , node0, by.x = &quot;name.clean&quot;, by.y = &quot;name&quot;, all.x = T)
 
-links2 <- data.table(links.init[, list(source = ID.x, target = ID.y
-                      , value = value)])
-```
+links2 &lt;- data.table(links.init[, list(source = ID.x, target = ID.y
+                      , value = value)])</code></pre>
 
 But the result is as expected, companies cluster by country. The [full result](http://data-laborer.eu/Pages/Force_field_company.html) is here, a bit heavy to be loaded here.
 
 The big central cluster is made of british companies. Without the title of the officers, we can now link the british activity and the US one, through one man, Philippe Crouzat which definitely seems a key officer of EDF.
 
-```{r, fig.height=20, fig.width=15, eval = F, echo = T}
-forceNetwork(Links = links2, Nodes = node2, Source = "source",
-             Target = "target", Value = "value", NodeID = "name",
-             Group = "group", opacity = 1, zoom = TRUE)
-```
+
+<pre><code class="prettyprint ">forceNetwork(Links = links2, Nodes = node2, Source = &quot;source&quot;,
+             Target = &quot;target&quot;, Value = &quot;value&quot;, NodeID = &quot;name&quot;,
+             Group = &quot;group&quot;, opacity = 1, zoom = TRUE)</code></pre>
 
 ![Full force field](http://data-laborer.eu/assets/images/special/Open_corporqte_edf_jurisdiction_force_network.png)

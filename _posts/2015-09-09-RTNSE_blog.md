@@ -8,6 +8,8 @@ excerpt: Exemple of use of TSNE to create astonishing graphs
 teaser: assets/images/rtnse.png
 ---
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 Recently, Kaggle launch the scripts project, which is a board of scripts released by competitioners with possibilites of evaluations by peers.
 
 One of the script is a scatterplot obtained through t-distributed stochastic neighbor embedding which summarise the information of a huge data set.
@@ -65,11 +67,9 @@ The package `Rtsne` have one function, ` Rtsne()`. To note:
 Libraries used:
 
 
-{% highlight r %}
-library(data.table)
+<pre><code class="prettyprint ">library(data.table)
 library(ggplot2)
-library(Rtsne)
-{% endhighlight %}
+library(Rtsne)</code></pre>
 
 
 
@@ -104,86 +104,66 @@ diamonds.dt3[, y.rtsne := diamonds.2d$Y[, 2]]
 
 
 
-{% highlight r %}
-# colorless
+<pre><code class="prettyprint "># colorless
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne)) +
-  geom_point(color = "black") +
-  ggtitle("Raw plot")
-{% endhighlight %}
+  geom_point(color = &quot;black&quot;) +
+  ggtitle(&quot;Raw plot&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-1.png)
 
-{% highlight r %}
-# clarity
+<pre><code class="prettyprint "># clarity
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = as.factor(clarity2)))+
-  geom_point() +   theme_classic() +  ggtitle("Clarity")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Clarity&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-2.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-2.png)
 
-{% highlight r %}
-# cut
+<pre><code class="prettyprint "># cut
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = as.factor(cut2))) +
-  geom_point() +   theme_classic() +  ggtitle("Cut")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Cut&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-3.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-3.png)
 
-{% highlight r %}
-# price
+<pre><code class="prettyprint "># price
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = price)) +
-  geom_point() +   theme_classic() +  ggtitle("Price")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Price&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-4.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-4.png)
 
-{% highlight r %}
-# color
+<pre><code class="prettyprint "># color
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = as.factor(color2))) +
-  geom_point() +   theme_classic() +  ggtitle("Color")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Color&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-5.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-5.png)
 
-{% highlight r %}
-# carat
+<pre><code class="prettyprint "># carat
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = carat)) +
-  geom_point() +   theme_classic() +  ggtitle("Carat")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Carat&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-6.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-6.png)
 
-{% highlight r %}
-# x
+<pre><code class="prettyprint "># x
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = x)) +
-  geom_point() +   theme_classic() +  ggtitle("X")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;X&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-7.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-7.png)
 
-{% highlight r %}
-# y
+<pre><code class="prettyprint "># y
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = y)) +
-  geom_point() +   theme_classic() +  ggtitle("Y")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Y&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-8.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-8.png)
 
-{% highlight r %}
-# z
+<pre><code class="prettyprint "># z
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = z)) +
-  geom_point() +   theme_classic() +  ggtitle("Z")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Z&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-9.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-9.png)
 
-{% highlight r %}
-# depth
+<pre><code class="prettyprint "># depth
 ggplot(data = diamonds.dt4, aes(x = x.rtsne, y = y.rtsne, color = depth)) +
-  geom_point() +   theme_classic() +  ggtitle("Depth")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Depth&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-10.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-5-10.png)
 
 <h4> Titanic data set </h4>
 
@@ -227,96 +207,74 @@ titanic.train2[, y.rtsne := res.rtnse$Y[, 2]]
 
 
 
-{% highlight r %}
-# Raw plot:
+<pre><code class="prettyprint "># Raw plot:
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne)) +
-  geom_point() +   theme_classic() +  ggtitle("Raw graph")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Raw graph&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-9](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-9-1.png)
+![plot of chunk unnamed-chunk-9](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-9-1.png)
 
 The 2D representation create clusters easily identifiable. Now, the question is: does these clusters make sense looking at the survivor variable.
 
 
-{% highlight r %}
-# Survived:
+<pre><code class="prettyprint "># Survived:
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Survived2))  +
-  geom_point() +   theme_classic() +  ggtitle("Survivors")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Survivors&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-10](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-10-1.png)
 
 The survivors are not that well separated, but we could see a few groups which are well defined.
 
 
-{% highlight r %}
-# Age
+<pre><code class="prettyprint "># Age
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Age)) +
-  geom_point() +   theme_classic() +  ggtitle("Age")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Age&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-1.png)
 
-{% highlight r %}
-# Pclass
+<pre><code class="prettyprint "># Pclass
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = as.factor(Pclass))) +
-  geom_point() +   theme_classic() +  ggtitle("Class")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Class&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-2.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-2.png)
 
-{% highlight r %}
-# Sex
+<pre><code class="prettyprint "># Sex
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = as.factor(flg.M))) +
-  geom_point() +   theme_classic() +  ggtitle("Sex")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Sex&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-3.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-3.png)
 
-{% highlight r %}
-# Parch
+<pre><code class="prettyprint "># Parch
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Parch))  +
-  geom_point() +   theme_classic() +  ggtitle("Number of Parents/Children Aboard")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Number of Parents/Children Aboard&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-4.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-4.png)
 
-{% highlight r %}
-# Fare
+<pre><code class="prettyprint "># Fare
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = Fare))  +
-  geom_point() +   theme_classic() +  ggtitle("Fare")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Fare&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-5.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-5.png)
 
-{% highlight r %}
-# SibSp
+<pre><code class="prettyprint "># SibSp
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = SibSp))  +
-  geom_point() +   theme_classic() +  ggtitle("Number of Siblings/Spouses Aboard")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Number of Siblings/Spouses Aboard&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-6.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-6.png)
 
-{% highlight r %}
-# flg.emb.s
+<pre><code class="prettyprint "># flg.emb.s
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = flg.emb.s)) +
-  geom_point() +   theme_classic() +  ggtitle("Embarkation at Southampton")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Embarkation at Southampton&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-7.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-7.png)
 
-{% highlight r %}
-# flg.emb.c
+<pre><code class="prettyprint "># flg.emb.c
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = flg.emb.c))  +
-  geom_point() +   theme_classic() +  ggtitle("Embarkation at Cherbourg")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Embarkation at Cherbourg&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-8.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-8.png)
 
-{% highlight r %}
-# flg.emb.q
+<pre><code class="prettyprint "># flg.emb.q
 ggplot(data = titanic.train2, aes(x = x.rtsne, y = y.rtsne, color = flg.emb.q))  +
-  geom_point() +   theme_classic() +  ggtitle("Embarkation at Queenstown")
-{% endhighlight %}
+  geom_point() +   theme_classic() +  ggtitle(&quot;Embarkation at Queenstown&quot;)</code></pre>
 
-![plot of chunk unnamed-chunk-11](http://data-laborer.eu/assets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-9.png)
+![plot of chunk unnamed-chunk-11](http://data-laborer.euassets/images/figures/source/2015-09-09-RTNSE_blog/unnamed-chunk-11-9.png)

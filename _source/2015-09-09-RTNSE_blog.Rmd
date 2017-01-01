@@ -8,6 +8,8 @@ excerpt: Exemple of use of TSNE to create astonishing graphs
 teaser: assets/images/rtnse.png
 ---
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 Recently, Kaggle launch the scripts project, which is a board of scripts released by competitioners with possibilites of evaluations by peers.
 
 One of the script is a scatterplot obtained through t-distributed stochastic neighbor embedding which summarise the information of a huge data set.
