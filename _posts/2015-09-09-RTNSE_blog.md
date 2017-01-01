@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: default
 title: "Messing with T-Distributed Stochastic Neighbor Embedding"
 categories: [Data visualisation]
 tags: [ggplot2, Rtsne, Statistic]
