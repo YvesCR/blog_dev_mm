@@ -12,7 +12,7 @@ A question was uplifted at the last R coding dojo. What is the location in centr
 
 The first bit of code of this question was made at the LondonR coding dojo, here:
 
-https://github.com/London-R-Dojo/Dojo-repo/tree/master/July-2015-Dojo
+[https://github.com/London-R-Dojo/Dojo-repo/tree/master/July-2015-Dojo](https://github.com/London-R-Dojo/Dojo-repo/tree/master/July-2015-Dojo)
 
 Two approach was used to reply to this question:
 
@@ -43,8 +43,7 @@ Coordinates of stations could be found on the TFL website.
 The function `get_map()` plot a map in a really efficient way and quite fast.
 
 
-{% highlight r %}
-library(ggmap)
+<pre><code class="prettyprint ">library(ggmap)
 library(alphahull)
 library(SDMTools) 
 library(devtools)
@@ -52,24 +51,23 @@ library(animation)
 library(ImageMagick)
 
 # load the libraries:
-l <- lapply(c("data.table", "alphahull", "ggmap", "SDMTools", "sp"), require, character.only = T)
+l &lt;- lapply(c(&quot;data.table&quot;, &quot;alphahull&quot;, &quot;ggmap&quot;, &quot;SDMTools&quot;, &quot;sp&quot;), require, character.only = T)
 
   # First, get the data:
-coord.station <- fread("tfl.stations.csv")
+coord.station &lt;- fread(&quot;tfl.stations.csv&quot;)
 
   # Get the map of London:
-london12 <- get_map(location = "London", zoom = 12)
-zones.london.plot12 <- ggmap(london12, maprange = F) 
+london12 &lt;- get_map(location = &quot;London&quot;, zoom = 12)
+zones.london.plot12 &lt;- ggmap(london12, maprange = F) 
 
-  # only zones 1 & inside the plot:
-coord.station[, zone2 := ifelse(type == "dlr", "dlr", zone) ]
-coord.station.min <- coord.station[zone == 1, list(lon, lat, zone2)]
+  # only zones 1 &amp; inside the plot:
+coord.station[, zone2 := ifelse(type == &quot;dlr&quot;, &quot;dlr&quot;, zone) ]
+coord.station.min &lt;- coord.station[zone == 1, list(lon, lat, zone2)]
 
   # plot stations
-zones.london <- zones.london.plot12 +
+zones.london &lt;- zones.london.plot12 +
           geom_point(data = coord.station.min, aes(x = lon, y = lat, colour = as.factor(zone2)), size = 1.5) +
-          scale_colour_discrete(name = "Zone")
-{% endhighlight %}
+          scale_colour_discrete(name = &quot;Zone&quot;)</code></pre>
 
 
 
@@ -80,22 +78,20 @@ zones.london <- zones.london.plot12 +
 The alpha parameter control the alpha-shape. The smallest the value, the more complicated the constraint.
 
 
-{% highlight r %}
-  # voronoi and constraint:
-alphashape <- ashape(coord.station.min$lon, coord.station.min$lat, alpha = 0.021)
+<pre><code class="prettyprint ">  # voronoi and constraint:
+alphashape &lt;- ashape(coord.station.min$lon, coord.station.min$lat, alpha = 0.021)
 
   # voronoi summits:
-voronoi.full <- data.table(alphashape$delvor.obj$mesh)
-polygon.ext <- data.frame(alphashape$edges)
+voronoi.full &lt;- data.table(alphashape$delvor.obj$mesh)
+polygon.ext &lt;- data.frame(alphashape$edges)
 
 # plot the voronoi diagram without constraint:
-plot.no.map.voronoi <- zones.london +
-  geom_segment(data = voronoi.full, aes(x = mx1, y = my1, xend = mx2, yend = my2), colour = "red", size=0.25) +
-  geom_segment(data = polygon.ext, aes(x = x1, y = y1, xend = x2, yend = y2), colour = "blue", size=0.25)
-plot.no.map.voronoi
-{% endhighlight %}
+plot.no.map.voronoi &lt;- zones.london +
+  geom_segment(data = voronoi.full, aes(x = mx1, y = my1, xend = mx2, yend = my2), colour = &quot;red&quot;, size=0.25) +
+  geom_segment(data = polygon.ext, aes(x = x1, y = y1, xend = x2, yend = y2), colour = &quot;blue&quot;, size=0.25)
+plot.no.map.voronoi</code></pre>
 
-![plot of chunk unnamed-chunk-3](http://data-laborer.eu/assets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-3](http://data-laborer.euassets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-3-1.png)
 
 Now, we have the constraint and the voronoi diagram on all the subways station of the zone 1.
 
@@ -106,51 +102,49 @@ As I want to keep only the voronoi summit inside the constraint, I use the funct
 The function takes only the ordered summit of the constraint as the polygon. The first loop reorder the summits.
 
 
-{% highlight r %}
- ## problem: voronoi summit are outside the polygon.
+<pre><code class="prettyprint "> ## problem: voronoi summit are outside the polygon.
   #we are looking for the voronoi summits which are inside the polygon.
   # our issue here is that the function pnt.in.polygon need an ordered table of the summit.
   # And the function alphahull release an unordered set of points.
 
   # voronoi summits:
-voronoi.summit <- unique(rbind(voronoi.full[, list(mx1, my1)], voronoi.full[, list(mx2, my2)], use.names = F))
+voronoi.summit &lt;- unique(rbind(voronoi.full[, list(mx1, my1)], voronoi.full[, list(mx2, my2)], use.names = F))
 
   # do a channel with the variables ind1 et ind2:
-nb.edges <- dim(polygon.ext)[1]
+nb.edges &lt;- dim(polygon.ext)[1]
   
   # initialisation of the table:
-order <- data.frame(order = rep(2, nb.edges), lon = rep(0, nb.edges), lat = rep(0, nb.edges), stringsAsFactors = F)
+order &lt;- data.frame(order = rep(2, nb.edges), lon = rep(0, nb.edges), lat = rep(0, nb.edges), stringsAsFactors = F)
 
   # new table to modify:
-polygon.ext2 <- polygon.ext
+polygon.ext2 &lt;- polygon.ext
 
-order[1, ] <- polygon.ext2[1, c("ind1", "x1", "y1")]
-polygon.ext2 <- polygon.ext2[-1, ]
+order[1, ] &lt;- polygon.ext2[1, c(&quot;ind1&quot;, &quot;x1&quot;, &quot;y1&quot;)]
+polygon.ext2 &lt;- polygon.ext2[-1, ]
   
   # loop through the summits to select each time the next one:
-for (i in 2: nb.edges) { # i <- 2
-  if(order[i-1, 1] %in% polygon.ext2$ind1) { order[i, ] <- polygon.ext2[which(polygon.ext2$ind1 == order[i-1, 1]), c("ind2", "x2", "y2")]
-  polygon.ext2 <- polygon.ext2[-which(polygon.ext2$ind1 == order[i-1, 1]), ]
-  } else { order[i, ] <- polygon.ext2[which(polygon.ext2$ind2 == order[i-1, 1]), c("ind1", "x1", "y1")]
-  polygon.ext2 <- polygon.ext2[-which(polygon.ext2$ind2 == order[i-1, 1]), ]}
+for (i in 2: nb.edges) { # i &lt;- 2
+  if(order[i-1, 1] %in% polygon.ext2$ind1) { order[i, ] &lt;- polygon.ext2[which(polygon.ext2$ind1 == order[i-1, 1]), c(&quot;ind2&quot;, &quot;x2&quot;, &quot;y2&quot;)]
+  polygon.ext2 &lt;- polygon.ext2[-which(polygon.ext2$ind1 == order[i-1, 1]), ]
+  } else { order[i, ] &lt;- polygon.ext2[which(polygon.ext2$ind2 == order[i-1, 1]), c(&quot;ind1&quot;, &quot;x1&quot;, &quot;y1&quot;)]
+  polygon.ext2 &lt;- polygon.ext2[-which(polygon.ext2$ind2 == order[i-1, 1]), ]}
 }
 
   # list of voronoi summits which are in the polygon:
-voronoi.constrain <- data.table(pnt.in.poly(voronoi.summit, order[, c("lon", "lat")]))
+voronoi.constrain &lt;- data.table(pnt.in.poly(voronoi.summit, order[, c(&quot;lon&quot;, &quot;lat&quot;)]))
 
   # voronoi inside the polygon:
-voronoi.part <- merge(voronoi.full, voronoi.constrain, by = c("mx1", "my1"), all.x = T)
-setnames(voronoi.constrain, c("mx1", "my1"), c("mx2", "my2"))
-voronoi.part <- merge(voronoi.part, voronoi.constrain, by = c("mx2", "my2"), all.x = T)
+voronoi.part &lt;- merge(voronoi.full, voronoi.constrain, by = c(&quot;mx1&quot;, &quot;my1&quot;), all.x = T)
+setnames(voronoi.constrain, c(&quot;mx1&quot;, &quot;my1&quot;), c(&quot;mx2&quot;, &quot;my2&quot;))
+voronoi.part &lt;- merge(voronoi.part, voronoi.constrain, by = c(&quot;mx2&quot;, &quot;my2&quot;), all.x = T)
 
-   # plot the voronoi diagram with constraint & only inside edge of voronoi diagram:
-zones.london.vor <- zones.london +
-  geom_segment(data = polygon.ext, aes(x = x1, y = y1, xend = x2, yend = y2), colour = "blue", size = 0.25) +
-  geom_segment(data = voronoi.part[pip.x == 1 & pip.y == 1, ], aes(x = mx2, y = my2, xend = mx1, yend = my1), colour = "red", size = 0.25) 
-zones.london.vor
-{% endhighlight %}
+   # plot the voronoi diagram with constraint &amp; only inside edge of voronoi diagram:
+zones.london.vor &lt;- zones.london +
+  geom_segment(data = polygon.ext, aes(x = x1, y = y1, xend = x2, yend = y2), colour = &quot;blue&quot;, size = 0.25) +
+  geom_segment(data = voronoi.part[pip.x == 1 &amp; pip.y == 1, ], aes(x = mx2, y = my2, xend = mx1, yend = my1), colour = &quot;red&quot;, size = 0.25) 
+zones.london.vor</code></pre>
 
-![plot of chunk unnamed-chunk-4](http://data-laborer.eu/assets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](http://data-laborer.euassets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-4-1.png)
 
 <h3>  Finding the furthest point from the subway </h3>
 
@@ -158,28 +152,26 @@ I am looking for the voronoi summit the furthest from any subway station.
 I use the `spDistsN1` function to calculate the distance on a sphere.   
 
 
-{% highlight r %}
-### Finding the furthest point:
+<pre><code class="prettyprint ">### Finding the furthest point:
   # voronoi summit in the polygon
-voronoi.constrain.lim <- voronoi.constrain[pip == 1, list(mx2, my2)]
+voronoi.constrain.lim &lt;- voronoi.constrain[pip == 1, list(mx2, my2)]
 
   # matrix of distance between all the station and the voronoi summits: 
-matrix.dist <- apply(voronoi.constrain.lim, 1, function(eachPoint) spDistsN1(as.matrix(coord.station.min[, list(lon, lat)]), eachPoint, longlat = T))
+matrix.dist &lt;- apply(voronoi.constrain.lim, 1, function(eachPoint) spDistsN1(as.matrix(coord.station.min[, list(lon, lat)]), eachPoint, longlat = T))
 
   # for each colum, the lowest distance:
-min.dist <- apply(matrix.dist, 2, min)
+min.dist &lt;- apply(matrix.dist, 2, min)
 
   # coordonates of the furthest point:
-min.coordinates <- voronoi.constrain.lim[which(matrix.dist == max(min.dist), arr.ind = T)[2]]
+min.coordinates &lt;- voronoi.constrain.lim[which(matrix.dist == max(min.dist), arr.ind = T)[2]]
 
   # Thirdly, plotting the point:
-zones.london.point <- zones.london.vor +
-   geom_point(data = min.coordinates, aes(x = mx2, y = my2), color = "green", size = 2) +
-  annotate("text", x = min.coordinates$mx2, y = min.coordinates$my2 - 0.003, label = "The albert memorial")
-zones.london.point
-{% endhighlight %}
+zones.london.point &lt;- zones.london.vor +
+   geom_point(data = min.coordinates, aes(x = mx2, y = my2), color = &quot;green&quot;, size = 2) +
+  annotate(&quot;text&quot;, x = min.coordinates$mx2, y = min.coordinates$my2 - 0.003, label = &quot;The albert memorial&quot;)
+zones.london.point</code></pre>
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](http://data-laborer.euassets/images/figures/source/2015-07-16-Voronoi_station/unnamed-chunk-5-1.png)
 
 In the end, it appears that the furthest point from the subway in London is near the Albert memorial. If you already find yourself hanging there and thinking that the next subway station was quite far, be rassured, it's definitely normal. :)
 
