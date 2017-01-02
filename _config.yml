@@ -29,7 +29,7 @@ url                      : "https://data-laborer.eu"
 baseurl                  : ""
 repository               : YvesCR/blog
 teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
-theme: minimal-mistakes-jekyll
+theme: jekyll-theme-architect
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 100
 comments:
