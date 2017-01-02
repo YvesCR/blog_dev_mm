@@ -57,8 +57,8 @@ $(function(){
 
 <div id="plottest" style="height: 270px"> </div>
 
-## Dynamic plot
 
+## Dynamic plot
 
 With a bit of js, we can easily complexify the process to make it reactive:
 
@@ -136,6 +136,6 @@ You can enter any integer between 1 and 544:
 
 <!--html_preserve--><input type="integer" class="form-control" id="myid" value="1" style="width: 90%;"/><!--/html_preserve--><!--html_preserve--><button type="submit" id="idsubmit" class="btn btn-default">Update dashboard!</button><!--/html_preserve-->
 
-<div id="plotdiv" style="height: 270px"></div>
+<!--html_preserve--><div id="plotdiv" style="height: 270px"></div><!--/html_preserve-->
 
 The same can be done to create dynamic json or any htmlwidget output.
