@@ -1,0 +1,10 @@
+# main links
+main:
+  - title: "List View"
+    url: /portfolio/
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
+  - title: "About"
+    url: /about/index.html

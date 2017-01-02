@@ -1,0 +1,27 @@
+---
+layout: post
+title: "The blog names you were spared"
+categories: []
+tags: [humor]
+date: 2016-01-03
+description: The name of blog you missed
+---
+
+
+If you think data-laborer is an awfull name for a blog on data science, wait to see the list of names you were spared of:
+
+heavy-data: A blog to handle the next generation of big data.
+
+sumo-data: A blog to handle heavy data.
+
+data-civilisation: oops, it was my first web site.
+
+the-missing-link-of-data: one link short.
+
+data-man: A new generation of super heroes, doing good and justice from his couch.
+
+beauty-and-the-data: A blog on data visualisation (and disney).
+
+
+
+
