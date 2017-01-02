@@ -25,7 +25,7 @@ To get a first insight of what could be said on the internal properties of this 
 
 
 
-![plot of chunk unnamed-chunk-4](http://data-laborer.eu/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](http://yvescr.github.io/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-4-1.png)
 
 The first dimension separate the unicycles with high values of nearly all the variables from the unicycle with low values.
 
@@ -38,7 +38,7 @@ Now that we know how the PCA separate the unicycle, let's have a look at the bra
 plot(res.pca, choix = "ind", habillage = 8, col.hab = 8, label =  "quali", invisible = "ind")
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](http://data-laborer.eu/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](http://yvescr.github.io/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-5-1.png)
 
 As we could see, we could find a brand for every need.
 
@@ -91,7 +91,7 @@ Autonomy and speed, both  related to the battery are significative variables.
 plot(res.lm, which = c(1:4))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-7](http://data-laborer.eu/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-1.png)![plot of chunk unnamed-chunk-7](http://data-laborer.eu/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-2.png)![plot of chunk unnamed-chunk-7](http://data-laborer.eu/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-3.png)![plot of chunk unnamed-chunk-7](http://data-laborer.eu/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-4.png)
+![plot of chunk unnamed-chunk-7](http://yvescr.github.io/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-1.png)![plot of chunk unnamed-chunk-7](http://yvescr.github.io/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-2.png)![plot of chunk unnamed-chunk-7](http://yvescr.github.io/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-3.png)![plot of chunk unnamed-chunk-7](http://yvescr.github.io/assets/images/figures/source/2016-02-13-Unicycle_comparison/unnamed-chunk-7-4.png)
 
 Two outliers appear, here, rows 45 and 27.
 

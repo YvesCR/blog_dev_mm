@@ -25,11 +25,11 @@ title                    : "Data laborer"
 title_separator          : "-"
 name                     : "Yves Crutain"
 description              : "Personnal blog of a data scientist"
-url                      : "https://data-laborer.eu"
+url                      : "https://yvescr.github.io"
 baseurl                  : ""
 repository               : YvesCR/blog
 teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
-theme: minimal-mistakes-jekyll
+theme: jekyll-theme-architect
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 100
 comments:
