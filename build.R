@@ -1,6 +1,6 @@
 local({
   # fall back on '/' if baseurl is not specified
-  knitr::opts_knit$set(base.url = 'http://data-laborer.eu')
+  knitr::opts_knit$set(base.url = 'http://data-laborer.eu/')
   knitr::opts_knit$set(dir.url = 'C:/blog/gen_blog_dev_mm/')
   
   # fall back on 'kramdown' if markdown engine is not specified
@@ -8,8 +8,8 @@ local({
   
   # see if we need to use the Jekyll render in knitr
   if (markdown == 'kramdown') {
-    knitr::render_jekyll(highlight = c("prettify"))
-  } else knitr::render_markdown()
+    knitr::render_jekyll(highlight = c("pygments"))
+  } else knitr::render_markdown(strict = T)
   
     # input/output filenames are passed as two additional arguments to Rscript
     a = commandArgs(TRUE)

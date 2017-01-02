@@ -1,0 +1,107 @@
+---
+title: "Officers_force_field"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+#token:
+token <- "CzFKSqWPpAUEiBdRqMxw"
+
+# path
+path <- "C:/blog/gen/"
+
+# term
+term <- "edf"
+```
+
+```{r, include=TRUE, eval=TRUE, echo=TRUE, warning=FALSE, include=FALSE}
+library(Ropencorporate, quietly = T)
+library(data.table)
+library(DT)
+library(stringr)
+library(stringi)
+library(networkD3, quietly = T, warn.conflicts = F)
+```
+
+```{r, include=FALSE}
+load(file = paste0(path, "DATA/res_oc_", term, ".rda")) # res.oc
+```
+
+```{r, eval = FALSE, include=FALSE}
+company.number <- res.oc$oc.dt[, company.number]
+jurisdiction.code <- res.oc$oc.dt[, jurisdiction.code]
+company.out.l <- get.comp.number(company.number, jurisdiction.code)
+```
+
+```{r, echo = F, eval = F, include=FALSE}
+# not displayed: save the data
+save(company.out.l, file = paste0(path, "DATA/company_result_query_id_", term, ".rda"))
+```
+
+```{r, echo = F, include=FALSE}
+# not displayed: load the data
+load(file = paste0(path, "DATA/company_result_query_id_", term, ".rda")) # company.out.l
+```
+
+
+```{r, include=FALSE}
+officers.comp.dt <- company.out.l$officers.comp.dt
+
+# get rid of second name abreviation
+officers.comp.dt[, name.clean := gsub("([ ][A-Z][/.])", "", stri_trans_totitle(tolower(name)))]
+
+# Clean officers title
+officers.comp.dt[, position := stri_trans_totitle(tolower(position))]
+```
+
+
+```{r, eval=T, include=FALSE}
+company.id.dt <- company.out.l$company.id.dt
+
+# merge both tables:
+comp.officers <- merge(officers.comp.dt, company.id.dt[
+, list(jurisdiction.code, company.number, name.company = name)]
+, by = c("jurisdiction.code", "company.number"))
+
+# clear position: if less than 20 of a position, it goes into Other
+comp.officers[, position2 := ifelse(.N < 20, "Other", position), by = "position"]
+comp.officers[, name2 := paste0(name.clean, ", ", position2)]
+
+# nodes:
+nodes.c <- unique(c(comp.officers[, name2], comp.officers[, name.company]))
+node0 <- data.frame(ID = 0:(length(nodes.c) - 1)
+                    , name = nodes.c, size = 25
+                    , stringsAsFactors = F)
+
+# nodes with group: one color per position and one for company
+nodes.with.group <- merge(node0
+      , unique(comp.officers[, list(name2
+        , group = as.numeric(as.factor(position2)))])
+      , by.x = "name", by.y = "name2", all.x = T)
+
+# put a high value for company for the group and the size
+nodes.with.group$group[is.na(nodes.with.group$group)] <- 30
+nodes.with.group$size[is.na(nodes.with.group$group)] <- 50
+
+# sort the table
+node <- nodes.with.group[order(nodes.with.group$ID), ]
+
+# links 
+links0 <- merge(
+  merge(
+    comp.officers[!(is.na(name.clean)|is.na(name.company))
+                  , list(value = .N), by = c("name2", "name.company")]
+    , node0, by.x = "name2", by.y = "name", all.x = T)
+  , node0, by.x = "name.company", by.y = "name", all.x = T)
+
+links <- data.table(links0[, list(source = ID.x, target = ID.y
+                      , value = value)])
+```
+
+
+```{r, fig.height=20, fig.width=15, eval = T, echo = F}
+forceNetwork(Links = links, Nodes = node, Source = "source",
+             Target = "target", Value = "value", NodeID = "name",
+             Group = "group", opacity = 1, zoom = TRUE)
+```
