@@ -29,7 +29,8 @@ url                      : "https://yvescr.github.io"
 baseurl                  : ""
 repository               : YvesCR/blog
 teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
-theme: jekyll-theme-architect
+
+
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 100
 comments:
@@ -70,7 +71,7 @@ author:
   bio              : "Data Scientist: Insight harvester, R Addict, python junky AND foodie. My favourite stack: SQL server + R + opencpu"
   location         : "London"
   email            : "yves.crutain@gmail.com"
-  uri              : "data-laborer.eu"
+  uri              : "."
   bitbucket        :
   codepen          :
   dribbble         :
