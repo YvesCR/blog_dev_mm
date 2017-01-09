@@ -1,11 +1,8 @@
 ---
-layout: single
-title: "Ropencorporate: A Package to access Opencorporate API"
-categories: [hack]
-tags: [R, open corporates, package]
-date: 2016-05-02
-excerpt: Presentation of the version 0.1 of the Ropencorporate package
-photo_url: assets/images/Abstract-art-britto-qb140.jpg
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
 ---
 
 A couple of month ago, I went to the [London open data mission](http://www.meetup.com/fr-FR/London-Open-Data-Missions/) meetup in Shoreditch. It is a meetup organized by the company [Open corporates](https://opencorporates.com/), a company which gather officials documents on company creation and dissolution and make these documents available through an [API](http://api.opencorporates.com/).
@@ -18,7 +15,7 @@ First thing first, let's set up the session, query the data and do some cleaning
 
 ```{r, echo = F}
 # path
-path <- "C:/blog/gen/"
+path <- "C:/blog/blog_dev_mm/"
 ```
 
 ```{r warning=FALSE, result = 'hide', eval=FALSE}
@@ -72,7 +69,7 @@ The result we get is a bit messy: The same company could appear under multiple n
 For a complete cleaning, a good option is to use [open refine](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth) to do this work.
 But it is not the point here, so we just use the fingerprint method to simplify the name. For that, we use the `fingerprint.func` function plus a bit of work to keep a non formatted version of the name. 
 
-```{r, results='asis'}
+```{r, results='hide', message=FALSE, warning=FALSE, comment=F}
 ## What I want: the most frequent occurence of the name
 
 # First, we use the fingerprint method to normalise the name
@@ -94,7 +91,7 @@ oc.dt[, freq.name := NULL] ; oc.dt[, freq.name2 := NULL]; oc.dt[, name2 := NULL]
 
 We tighten the date variables.
 
-```{r}
+```{r, results='hide'}
 oc.dt[, Creation.date := as.Date(created.at)]
 oc.dt[, Update.date := as.Date(updated.at)]
 oc.dt[, Retrieved.date := as.Date(retrieved.at)]
@@ -110,7 +107,7 @@ Number of different companies which have the term, places where the term is the 
 
 Which are the entries with the term `r term` appearing the most?
 
-```{r results='asis'}
+```{r results='hide'}
 num.oc <- dim(oc.dt)[1]
 datatable(oc.dt[, list(Frequency = .N, Percentage = sprintf("%.1f%%", .N / num.oc * 100)), by = "Name"][order(Frequency, decreasing = T)], options = list(pageLength = 10))
 ```
@@ -127,7 +124,7 @@ datatable(oc.dt[, list(Frequency = .N, Percentage = sprintf("%.1f%%", .N / num.o
 
 Which are the more recent companies?
 
-```{r results='asis'}
+```{r results='hide'}
 datatable(oc.dt[, list(Frequency = .N, Percentage = sprintf("%.1f%%", .N / num.oc * 100)), by = c("Creation.date", "Name")][order(Creation.date, decreasing = T)], options = list(pageLength = 10))
 
 oc.dt[, Creation.date.m := as.Date(format(Creation.date, "01 %m %Y"), "%d %m %Y")]
@@ -138,7 +135,7 @@ oc.dt.date0 <- oc.dt[, .N, by = c("Name", "Creation.date.m")][, list(Creation.da
 
 Dissolution dates are not of good quality: We keep only the ones inside the boundaries between the first creation and today.
 
-```{r results='asis'}
+```{r results='hide'}
 oc.dt.date1 <- oc.dt[!is.na(Dissolution.date.m) & Dissolution.date.m < Sys.Date() & Dissolution.date.m >=  min(oc.dt.date0[, Creation.date.m]), .N, by = c("Name", "Dissolution.date.m")][, list(Dissolution.date = .N), by = c("Dissolution.date.m")]
 
 oc.dt.date <- merge(oc.dt.date0, oc.dt.date1, by.x = "Creation.date.m"
@@ -146,7 +143,9 @@ oc.dt.date <- merge(oc.dt.date0, oc.dt.date1, by.x = "Creation.date.m"
 
 oc.dt.date[is.na(Creation.date), Creation.date := 0]
 oc.dt.date[is.na(Dissolution.date), Dissolution.date := 0] 
+```
 
+```{r}
 dygraph(oc.dt.date, main = "Creation & dissolution of companies")
 ```
 
