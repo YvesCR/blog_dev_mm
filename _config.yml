@@ -30,7 +30,6 @@ baseurl                  : ""
 repository               : YvesCR/blog
 teaser                   : /assets/images/Hausdülmen_--_2009_--_0706.jpg
 
-
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 100
 comments:
@@ -68,7 +67,7 @@ analytics:
 author:
   name             : "Yves Crutain"
   avatar           : "/assets/images/0031e3e.jpg"
-  bio              : "Data Scientist: Insight harvester, R Addict, python junky AND foodie. My favourite stack: SQL server + R + opencpu"
+  bio              : "Data Scientist: Insight harvester, R Addict, python junky AND foodie."
   location         : "London"
   email            : "yves.crutain@gmail.com"
   uri              : "."
