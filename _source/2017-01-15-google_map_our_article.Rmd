@@ -78,7 +78,7 @@ coord.df.lim.2 <- coord.df.lim  %>% select(lon, lat, date, hour, day_week)
 
 The first thing to do with this data set is to create an heat map to visually assess the content.
 
-```{r, fig.width=9, fig.height=9, message=FALSE, warning=FALSE}
+```{r, fig.width=10, fig.height=10, message=FALSE, warning=FALSE}
 # min amd max longitude in a specific variable:
 mean_lon <- mean(coord.df.lim.2$lon)
 mean_lat <- mean(coord.df.lim.2$lat)
@@ -141,7 +141,7 @@ Is it possible to define specific place at specific time period?
 
 Let's have a look at the full time period:
 
-```{r}
+```{r, fig.width=10}
 # number of points per day:
 date_hour_freq <- coord.df.lim %>% 
     group_by(date, day_week, hour) %>% 
@@ -173,7 +173,7 @@ ggplot(data = date_freq_max_hour, aes(x = date, y = count)) +
 
 In a strange way, no data appear between November 2015 and March 2016.
 
-```{r}
+```{r, fig.width=10}
 hour_freq <- date_hour_freq %>% 
   group_by(hour) %>% 
   summarise(freq = sum(count))
@@ -208,7 +208,7 @@ As we can see on [that graph](https://github.com/YvesCR/yvescr.github.io/assets/
 
 Is there a discretisation that can be done per day?
 
-```{r}
+```{r, fig.width=10}
 week_freq <- date_hour_freq %>% 
   group_by(day_week) %>% 
   summarise(freq = sum(count))
@@ -219,7 +219,7 @@ ggplot(week_freq, aes(x = day_week, y = freq)) +
 
 I have more data stored for Saturday and Sunday, which seems normal, as it is the days where I use Google map the most.
 
-```{r, fig.width=12, fig.height=12}
+```{r, fig.width=10, fig.height=10}
 # Heatmap per weekday
 # plot the graph:
 ggmap::ggmap(my_map) +
@@ -278,7 +278,7 @@ Activities have a time stamps of their own.
 
 ``r format(nrow(activities_df), big.mark = ",")`` activities are recorded, an average of 7 per location. Nevertheless, we can find a confidence variable. If we restrict to only the highly confident time stamps, over 90, we limit to ``r format(nrow(activities_df_limit), big.mark = ",")`` rows.
 
-```{r}
+```{r, fig.width=10}
 ggplot(data = activities_df) +
     stat_density(aes(x = diff_minute, y = ..count..)) +
   scale_x_continuous(name = "Minutes", labels = comma) +
@@ -288,7 +288,7 @@ ggplot(data = activities_df) +
 Most of the time stamps of the activities are a couple of minutes after the time stamp of the coordinates.
 Nevertheless, we can also observe a decreasing sinusoidal trend with peaks at 24h, 48h and 64h.
 
-```{r}
+```{r, fig.width=10}
 ggplot(data = activities_df) +
   stat_count(aes(x = type)) +
   scale_y_continuous(labels = comma) +
@@ -297,7 +297,7 @@ ggplot(data = activities_df) +
 
 I don't have a car nor a bike so I was astonished to see so much tags "inVehicle" and "onBicycle". The reason of so much of these tags is that they are associated to a low confidence. When limiting to a confidence of 90 or above, the activities make finally sense. 
 
-```{r}
+```{r, fig.width=10}
 activities_df_limit <- activities_df %>% filter(confidence > 90)
 ggplot(data = activities_df_limit) +
   stat_count(aes(x = type)) +
