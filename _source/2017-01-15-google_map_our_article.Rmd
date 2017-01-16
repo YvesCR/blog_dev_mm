@@ -204,7 +204,7 @@ map_by_hour <- ggmap::ggmap(my_map) +
 ggsave(plot = map_by_hour, filename = "map_by_hour.png", width = 20, height = 20, dpi = 300)
 ```
 
-As we can see on [that graph](https://github.com/YvesCR/yvescr.github.io/tree/test/assets/images/special/map_by_hour.png), I am pretty quiet during the night, wake up at Acton between 8 and 9 and run around London the rest of the day, coming back home between 7 and 10 p.m..
+As we can see on [that graph](data-laborer.eu/assets/images/special/map_by_hour.png), I am pretty quiet during the night, wake up at Acton between 8 and 9 and run around London the rest of the day, coming back home between 7 and 10 p.m..
 
 Is there a discretisation that can be done per day?
 
@@ -309,7 +309,7 @@ Most of my activities are standing and tilting. I tilt when I use my unicycle so
 
 Is it possible to predict that way if a person has a car or a bike? Yes, definitely.
 
-I have created a graph by type that can [be found here](https://github.com/YvesCR/yvescr.github.io/tree/test/assets/images/special/map_by_type.png).
+I have created a graph by type that can [be found here](data-laborer.eus/assets/images/special/map_by_type.png).
 In that graph, it is possible to check where I am standing still and where I am just passing.
 
 ```{r, echo = F, eval = F}
