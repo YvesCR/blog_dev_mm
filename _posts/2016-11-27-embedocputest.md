@@ -103,7 +103,8 @@ htmltools::tags$button("Update dashboard!", type="submit", id="idsubmit", class=
 htmltools::tags$div(id="plotdiv", style="height: 270px")
 {% endhighlight %}
 
-
+<script src="https://cdn.opencpu.org/opencpu-0.4.js"></script>
+  
 <script> 
 
 $(function(){

@@ -1,0 +1,117 @@
+---
+layout: single
+title: "Cartographie des activités francaises par département(French article)"
+categories: [hack]
+tags: [R, opencpu, package, js]
+date: 2017-02-25
+excerpt: An API to map french activity by department 
+teaser: assets/images/Eugene_Ivanov_2091.jpg
+---
+
+Ce post de blog est, pour changer, en français. La raison vient du sujet traité : les activités françaises.
+
+Le but a long terme est de créer une segmentation du territoire qui puisse être viable pour une utilisation professionnelle, par exemple dans un département CRM.
+
+Cet article est un petit hack dans ce projet : une API pour créer une cartographie des activités de la France par départements.
+
+```{r, echo=FALSE}
+# dataset
+load("../data/dpt_count_act.rda")
+
+# libraries:
+pacman::p_load(tidyverse, ggplot2, scales)
+
+# client library for opencpu:
+htmltools::tags$script(src="https://code.jquery.com/jquery-1.11.1.min.js")
+htmltools::tags$script(src="https://cdn.opencpu.org/opencpu-0.4.js")
+
+# set page to communicate to with "mypackage" on server below
+htmltools::tags$script("ocpu.seturl('https://yvescr.ocpu.io/AppMapActivity/R')")
+# htmltools::tags$script("ocpu.seturl('http://localhost:3000/ocpu/library/AppMapActivity/R')")
+
+```
+
+# Sirene
+
+La base Sirene des entreprises françaises a été rendue public en janvier 2017.
+
+Le premier fichier sorti compte 10 millions de lignes, soit environ 9,4 millions  d'entreprises uniques (et des updates).
+
+Pour manier ces données, il est idéal de créer une base de données.
+
+Les données peuvent être téléchargées ici :
+[https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/](https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/)
+
+# Effectifs des codes activité
+
+Une analyse possible est de regarder le compte des entreprises par département par code apen700.
+
+Première constatation, une seule activité, "Location de terrains et d'autres biens immobiliers" représente 15 % des entreprises.
+
+```{r, echo = F}
+# nb of ent by apen700
+count_nb_ent_apen <- dpt_count_act %>%
+  group_by(apen700_label) %>%
+  summarise(count = sum(count)) %>%
+  mutate(freq_var = cut(count, breaks = c(0, 100, 500, 1000, 5000, 10000, 50000, 100000, Inf)
+    , labels = c("0-100", "101-500", "500-1k", "1k-5k", "5k-10k", "10k-50k", "50k-100k", "100k+")))
+
+# plot the graph
+ggplot(count_nb_ent_apen, aes(freq_var)) +
+  stat_count() +
+  scale_x_discrete(name = "Taille des type d'activité") +
+  scale_y_continuous(label = comma, name = "Frequence")
+```
+
+Il y a des secteurs d'activité de toutes tailles présentes dans le fichier. Cela pose un problème pour une éventuelle classification des activités. En effet, il est délicat de comparer les locations de terrains, qui compte 1.5 million d'entreprises et la vinification, qui en compte 1 500.
+
+Pour se rendre compte de la localisation des secteurs d'activités en France, j'ai crée une micro app qui permet de générer la carte des activités par départements.
+
+# Cartographie des activités par département
+
+Comment ça marche?
+
+Utilisez le bouton déroulant pour sélectionner un type d'activité puis appuyez sur le boutton __GO__.
+
+La carte du nombre d'activité par département devrait s'afficher.
+
+
+<script> 
+
+$(function(){
+
+  $('container-fluid main-container').css({'visibility': 'visible'});
+
+  var act_id = 1;
+
+  var req = $("#plotdiv").rplot("display_activity", {activity_to_display : Number(act_id)});
+
+  $("#idsubmit").click(function(e){
+  
+ var act_id = $("#myid").val();
+  
+    var req = $("#plotdiv").rplot("display_activity", {activity_to_display : Number(act_id)});
+
+  });
+
+});
+  
+</script>
+
+```{r, echo=FALSE}
+load("../data/lookup.rda")
+
+# input box:
+htmltools::tags$select(
+  htmltools::HTML(paste0("<option value='", AppMapActivity::lookup$id, "'>"
+  , AppMapActivity::lookup$apen700_label, "</option>", collapse = ""))
+  , type="integer", class="form-control", id="myid", style = "width: 90%;")
+
+# button box:
+htmltools::tags$button("GO!", type="submit", id="idsubmit", class="btn btn-default")
+```
+
+```{r, echo=FALSE}
+# plot:
+htmltools::tags$div(id="plotdiv", style="height: 550px")
+```

@@ -16,4 +16,4 @@ Why blogging?
  * To have a reminder for my code
  * Give back to the open source and academic communities
  
- You can find my CV [here](https://github.com/YvesCR/yvescr.github.io/blob/test/cv/CV_English_Crutain_2017-01-03.pdf).
+ You can find my CV [here](http://data-laborer.eu/cv/CV_English_Crutain_2017-01-03.pdf).
